@@ -1,0 +1,97 @@
+[color]
+    ui = auto
+
+[user]
+    name = Anton Eprev
+    email = a.eprev@gmail.com
+[core]
+    excludesfile = ~/.gitignore
+
+[apply]
+    whitespace = nowarn
+
+[alias]
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+
+    ### Explore your history, the commits and the code
+
+    # List commits in short form, with colors and branch/tag annotations
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+    # List commits showing changed files is invoked with git ll and looks like this:
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    # List with no colors if you need to chain the out put with Unix pipes:
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+    # List oneline commits showing dates:
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+    # List oneline commits showing relative dates:
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+    # Short git log
+    le = log --oneline --decorate
+
+    # Graph
+    lg = log --graph --pretty="format:%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+
+    ### Show the history of a file, with diffs
+
+    # List all the commits related to a file, with the diff of the changes
+    filelog = log -u
+    fl = log -u
+
+    ### Log commands to inspect (recent) history
+
+    # Show modified files in last commit:
+    dl = "!git ll -1"
+
+    # Show a diff last commit:
+    dlc = diff --cached HEAD^
+
+    # Show content (full diff) of a commit given a revision:
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    lc  = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+    ### Finding files and content inside files (grep)
+
+    # Find a file path in codebase:
+    f = "!git ls-files | grep -i"
+
+    # Search/grep your entire codebase for a string:
+    grep = grep -Ii
+    gr = grep -Ii
+
+    # Grep from root folder:
+    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+
+    ### Going meta: List all your Aliases (la)
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    ### Tag aliases
+
+    # Show the last tag:
+    lasttag = describe --tags --abbrev=0
+    lt = describe --tags --abbrev=0
+
+    ### Basic Shortcuts
+
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ai = add --interactive
+    ci = commit
+    cma = commit -a -m
+    ca = commit --amend
+    co = checkout
+    br = branch
+    diff = diff --word-diff
+    dc = diff --cached
+
+    ### Stash operations
+
+    sl = stash list
+    sa = stash apply
+    ss = stash save
