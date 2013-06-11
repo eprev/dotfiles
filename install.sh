@@ -23,4 +23,4 @@ else
 fi
 
 unset dfcopy
-source ~/.bash_profile
+source $HOME/.bash_profile
