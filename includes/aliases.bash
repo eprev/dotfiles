@@ -25,9 +25,6 @@ alias s="subl ."
 alias o="open"
 alias oo="open ."
 
-# Setup git completion for its alias
-__git_complete g __git_main
-
 alias grep='GREP_COLOR="1;37;45" LANG=C grep --color=auto'
 alias ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 

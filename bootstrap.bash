@@ -5,6 +5,9 @@ for file in $HOME/.dotfiles/includes/*.bash; do
 done
 unset file
 
+# Setup git completion for its alias
+__git_complete g __git_main
+
 # http://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 
 # Case-insensitive globbing (used in pathname expansion)
