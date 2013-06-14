@@ -1,6 +1,6 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.bash_profile
 
-for file in $HOME/.dotfiles/lib/{prompt,exports,aliases,functions}.sh; do
+for file in $HOME/.dotfiles/includes/*.bash; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -15,6 +15,12 @@ shopt -s histappend
 
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
+
+# Save all lines of a multiple-line command in the same history entry (allows easy re-editing of multi-line commands)
+shopt -s cmdhist
+
+# Don't autocomplete when accidentally pressing Tab on an empty line. (It takes forever and yields "Display all 15 gazillion possibilites?")
+shopt -s no_empty_cmd_completion
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`

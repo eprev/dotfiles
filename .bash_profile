@@ -1,1 +1,1 @@
-source ~/.dotfiles/lib/bootstrap.sh
+source ~/.dotfiles/bootstrap.bash
