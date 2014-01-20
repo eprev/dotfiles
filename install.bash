@@ -20,6 +20,9 @@ else
     fi
     cd $HOME/.dotfiles
     dfcopy
+    mkdir -p $HOME/.vim/backups
+    mkdir -p $HOME/.vim/swaps
+    mkdir -p $HOME/.vim/undo
 fi
 
 unset dfcopy
