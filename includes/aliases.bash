@@ -9,7 +9,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Sublime
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Shortcuts
 alias d="cd ~/Documents/Dropbox"
