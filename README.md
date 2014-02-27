@@ -1,4 +1,8 @@
-Setup or update:
+# ~/.*
+
+![](screenshot.png)
+
+Install or update:
 ```
 curl -L https://github.com/eprev/dotfiles/raw/master/install.bash | bash
 ```
