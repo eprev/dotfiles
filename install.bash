@@ -2,8 +2,9 @@
 
 function dfcopy() {
     for i in .*; do
-        cp -rfv $i $HOME
+        [ -f $i ] && cp -fv $i $HOME
     done
+    cp -rfv .vim $HOME
 }
 
 if [ -d $HOME/.dotfiles ]; then
