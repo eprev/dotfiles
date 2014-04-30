@@ -40,8 +40,14 @@ set number
 syntax on
 " Highlight current line
 " set cursorline
-" Make tabs as wide as two spaces
+" Make tabs as wide as four spaces
 set tabstop=4
+" Indenting is 4 spaces
+set shiftwidth=4
+" Turns it on
+set autoindent
+" Do it smarter!
+set smartindent
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
@@ -49,6 +55,8 @@ set list
 set hlsearch
 " Ignore case of searches
 set ignorecase
+" Use case if any caps used
+set smartcase
 " Highlight dynamically as pattern is typed
 set incsearch
 " Always show status line
@@ -88,6 +96,9 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+" Use Bad Wolf color scheme
+colorscheme badwolf
 
 " Automatic commands
 if has("autocmd")
