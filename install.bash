@@ -2,7 +2,7 @@
 
 function dfcopy() {
     for i in .*; do
-        [ -f $i ] && cp -rfv $i $HOME
+        cp -rfv $i $HOME
     done
 }
 
