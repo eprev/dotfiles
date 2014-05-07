@@ -1,5 +1,7 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.bash_profile
 
+export TERM=xterm-256color
+
 for file in $HOME/.dotfiles/includes/*.bash; do
     [ -r "$file" ] && source "$file"
 done
