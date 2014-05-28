@@ -11,6 +11,10 @@ alias -- -="cd -"
 # Sublime
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
+# Tmux
+
+alias ta="tmux attach"
+
 # Shortcuts
 alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
