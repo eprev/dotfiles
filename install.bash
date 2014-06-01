@@ -18,7 +18,7 @@ else
     ln -s .dotfiles/inputrc .inputrc
     ln -s .dotfiles/tmux.conf .tmux.conf
     ln -s .dotfiles/vim .vim
-    ln -s .dotfiles/vimrc .vim
+    ln -s .dotfiles/vimrc .vimrc
 fi
 
 source $HOME/.bash_profile

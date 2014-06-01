@@ -3,3 +3,4 @@
 *.so
 vim/.netrwhist
 vim/ruby/command-t/Makefile
+vim/ruby/command-t/ext.bundle
