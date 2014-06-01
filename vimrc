@@ -121,6 +121,8 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
+" AutoComplPop
+let g:acp_mappingDriven = 1
 " Toggle AutoComplPop
 imap <F3> <C-\><C-O>:call AutoComplPopToggle()<cr>
 let g:autocomplpop_is_locked = 0
@@ -144,17 +146,12 @@ endfunction
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['jshint']
 
-" Tabline
-"let g:airline#extensions#tabline#enabled = 1
-
-" To disable a plugin, add it's bundle name to the following list
+" Pathogen
 let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'vim-airline')
-
 execute pathogen#infect()
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-
