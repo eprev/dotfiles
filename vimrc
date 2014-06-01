@@ -120,3 +120,22 @@ if has("autocmd")
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
+
+" Toggle AutoComplPop
+imap <F3> <C-\><C-O>:call AutoComplPopToggle()<cr>
+let g:autocomplpop_is_locked = 0
+function! AutoComplPopToggle()
+	if g:autocomplpop_is_locked
+		try
+			AutoComplPopUnlock
+		catch
+		endtry
+		let g:autocomplpop_is_locked =0
+	else
+		try
+			AutoComplPopLock
+		catch
+		endtry
+		let g:autocomplpop_is_locked = 1
+	endif
+endfunction

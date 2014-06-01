@@ -2,5 +2,8 @@
 *.log
 *.so
 vim/.netrwhist
+vim/.VimballRecord
+vim/doc/tags
+vim/doc/tags-ja
 vim/ruby/command-t/Makefile
 vim/ruby/command-t/ext.bundle
