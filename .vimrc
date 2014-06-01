@@ -18,15 +18,14 @@ set gdefault
 set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
+" Change command mode key
+nnoremap ; :
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
-    set undodir=~/.vim/undo
-endif
+" Disable backups and swapfiles
+set nobackup
+set noswapfile
 
 " Respect modeline in files
 set modeline
@@ -39,7 +38,7 @@ set number
 " Enable syntax highlighting
 syntax on
 " Highlight current line
-" set cursorline
+set cursorline
 " Make tabs as wide as four spaces
 set tabstop=4
 " Indenting is 4 spaces
@@ -86,7 +85,17 @@ set showcmd
 set scrolloff=3
 
 " Stop indenting when pasting
-set pastetoggle=<f5>
+set pastetoggle=<f2>
+
+imap <C-e> <End>
+imap <C-a> <Home>
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ve :e $MYVIMRC<CR>
+nmap <silent> <leader>vs :so $MYVIMRC<CR>
+
+" Hide buffers instead of closing them
+set hidden
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
@@ -97,8 +106,9 @@ function! StripWhitespace()
     call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+" Save a file as root
+cmap w!! w !sudo tee % >/dev/null
 
 " Use Bad Wolf color scheme
 colorscheme badwolf
