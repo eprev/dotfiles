@@ -140,11 +140,21 @@ function! AutoComplPopToggle()
 	endif
 endfunction
 
-execute pathogen#infect()
-
 " Syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['jshint']
 
 " Tabline
 "let g:airline#extensions#tabline#enabled = 1
+
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'vim-airline')
+
+execute pathogen#infect()
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+
