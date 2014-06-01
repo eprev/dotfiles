@@ -145,3 +145,6 @@ execute pathogen#infect()
 " Syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['jshint']
+
+" Tabline
+"let g:airline#extensions#tabline#enabled = 1
