@@ -139,3 +139,9 @@ function! AutoComplPopToggle()
 		let g:autocomplpop_is_locked = 1
 	endif
 endfunction
+
+execute pathogen#infect()
+
+" Syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_javascript_checkers = ['jslint']
