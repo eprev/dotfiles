@@ -1,0 +1,6 @@
+#Host           example
+#HostName       example.org
+#IdentityFile   ~/.ssh/id_rsa
+#User           eprev
+#ForwardAgent   yes
+
