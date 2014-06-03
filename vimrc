@@ -155,3 +155,7 @@ execute pathogen#infect()
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
+
+" Command-T
+" Scan dot-directtories
+let g:CommandTScanDotDirectories = 1
