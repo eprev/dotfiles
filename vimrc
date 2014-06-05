@@ -87,8 +87,27 @@ set scrolloff=3
 " Stop indenting when pasting
 set pastetoggle=<f2>
 
+" Insert mode
 imap <C-e> <End>
 imap <C-a> <Home>
+imap <M-b> <C-o>b
+imap <M-f> <C-o>e<Right>
+imap <C-d> <Del>
+imap <C-h> <BS>
+inoremap <A-b> <C-o>b
+inoremap <A-w> <C-o>w
+
+" Insert mode and Command-line modes
+noremap! <A-h> <Left>
+noremap! <A-j> <Down>
+noremap! <A-k> <Up>
+noremap! <A-l> <Right>
+
+" Command line mode
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <M-b> <S-Left>
+cmap <M-f> <S-Right>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ve :e $MYVIMRC<CR>
@@ -159,3 +178,7 @@ let g:tagbar_autoclose = 1
 " Command-T
 " Scan dot-directtories
 let g:CommandTScanDotDirectories = 1
+let g:CommandTCursorLeftMap  = ['<Left>',  '<A-h>']
+let g:CommandTCursorRightMap = ['<Right>', '<A-l>']
+let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
+let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
