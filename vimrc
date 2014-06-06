@@ -1,4 +1,4 @@
-" https://raw.github.com/mathiasbynens/dotfiles/master/.vimrc
+" vim: ts=4 et fmr={,} fdl=0 fdm=marker:
 
 " Make Vim more useful
 set nocompatible
@@ -169,61 +169,53 @@ endif
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" AutoComplPop
-let g:acp_mappingDriven = 1
-" Toggle AutoComplPop
-imap <F3> <C-\><C-O>:call AutoComplPopToggle()<cr>
-let g:autocomplpop_is_locked = 0
-function! AutoComplPopToggle()
-	if g:autocomplpop_is_locked
-		try
-			AutoComplPopUnlock
-		catch
-		endtry
-		let g:autocomplpop_is_locked =0
-	else
-		try
-			AutoComplPopLock
-		catch
-		endtry
-		let g:autocomplpop_is_locked = 1
-	endif
-endfunction
+" Visual mode {
 
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_javascript_checkers = ['jshint']
+    " Pressing * or # searches for the current selection
+    function! s:VSetSearch()
+        let temp = @@
+        norm! gvy
+        let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+        let @@ = temp
+    endfunction
 
-" Pathogen
-let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'vim-airline')
-execute pathogen#infect()
+    vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+    vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
+    " Visual shifting (does not exit Visual mode)
+    vnoremap < <gv
+    vnoremap > >gv
 
-" Command-T
-" Scan dot-directtories
-let g:CommandTScanDotDirectories = 1
-let g:CommandTCursorLeftMap  = ['<Left>',  '<A-h>']
-let g:CommandTCursorRightMap = ['<Right>', '<A-l>']
-let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
-let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
+" }
 
-" Visual mode pressing * or # searches for the current selection
-function! s:VSetSearch()
-let temp = @@
-norm! gvy
-let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-let @@ = temp
-endfunction
+" Pathogen {
+    let g:pathogen_disabled = []
+    " call add(g:pathogen_disabled, 'syntastic')
+    execute pathogen#infect()
+" }
 
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+" Syntastic {
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_javascript_checkers = ['jshint']
+" }
 
+" Tagbar {
+    " Toggle Tagbar
+    nmap <F8> :TagbarToggle<CR>
+    map <leader>tb :TagbarToggle<cr>
+    " Auto focus Tagbar and close
+    let g:tagbar_autofocus = 1
+    let g:tagbar_autoclose = 1
+" }
 
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
+" Command-T {
+
+    " Scan dot-directtories
+    let g:CommandTScanDotDirectories = 1
+    " Alt-hl move the cursor
+    let g:CommandTCursorLeftMap  = ['<Left>',  '<A-h>']
+    let g:CommandTCursorRightMap = ['<Right>', '<A-l>']
+    let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
+    let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
+
+" }
