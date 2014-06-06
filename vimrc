@@ -39,6 +39,8 @@ set number
 syntax on
 " Highlight current line
 set cursorline
+" Use spaces instead of tabs
+set expandtab
 " Make tabs as wide as four spaces
 set tabstop=4
 " Indenting is 4 spaces
@@ -113,6 +115,9 @@ cmap <M-f> <S-Right>
 nmap <silent> <leader>ve :e $MYVIMRC<CR>
 nmap <silent> <leader>vs :so $MYVIMRC<CR>
 
+" Switch CWD to the directory of the open buffer:
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
 " Hide buffers instead of closing them
 set hidden
 
@@ -127,10 +132,14 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
 " Save a file as root
-cmap w!! w !sudo tee % >/dev/null
+cmap W w !sudo tee % >/dev/null
 
 " Use Bad Wolf color scheme
 colorscheme badwolf
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
 
 " Automatic commands
 if has("autocmd")
@@ -182,3 +191,14 @@ let g:CommandTCursorLeftMap  = ['<Left>',  '<A-h>']
 let g:CommandTCursorRightMap = ['<Right>', '<A-l>']
 let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
 let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
+
+" Visual mode pressing * or # searches for the current selection
+function! s:VSetSearch()
+let temp = @@
+norm! gvy
+let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
