@@ -88,6 +88,11 @@ set scrolloff=3
 
 " Stop indenting when pasting
 set pastetoggle=<f2>
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
 
 " Insert mode
 imap <C-e> <End>
@@ -135,11 +140,23 @@ noremap <leader>ss :call StripWhitespace()<CR>
 cmap W w !sudo tee % >/dev/null
 
 " Use Bad Wolf color scheme
-colorscheme badwolf
+try
+    colorscheme badwolf
+catch
+endtry
+
+" Don't redraw while executing macros
+set lazyredraw
+
+" Add a bit extra margin to the left
+set foldcolumn=1
 
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
 
 " Automatic commands
 if has("autocmd")
@@ -148,6 +165,9 @@ if has("autocmd")
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
+
+" Set to auto read when a file is changed from the outside
+set autoread
 
 " AutoComplPop
 let g:acp_mappingDriven = 1
