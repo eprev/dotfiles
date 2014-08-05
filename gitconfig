@@ -111,3 +111,5 @@
     ### Snapshots
 
     snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+[push]
+	default = simple

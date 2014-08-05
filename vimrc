@@ -250,3 +250,8 @@
     let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
 
 " }
+
+try
+    source ~/.vimrc_local
+catch
+endtry
