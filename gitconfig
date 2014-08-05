@@ -69,7 +69,7 @@
     gr = grep -Ii
 
     # Grep from root folder:
-    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    gra = "!git grep"
 
     ### Going meta: List all your Aliases (la)
     la = "!git config -l | grep alias | cut -c 7-"
