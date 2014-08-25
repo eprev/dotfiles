@@ -172,6 +172,8 @@
     if has("autocmd")
         " Enable file type detection
         filetype on
+        filetype indent on
+        autocmd FileType go compiler go
         " Treat .json files as .js
         autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
     endif
