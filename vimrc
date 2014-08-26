@@ -253,6 +253,12 @@
 
 " }
 
+" Yankring {
+
+    let g:yankring_history_dir = '~/.vim'
+
+" }
+
 try
     source ~/.vimrc_local
 catch
