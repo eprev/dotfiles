@@ -1,5 +1,6 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.bash_profile
 
+export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
 for file in $HOME/.dotfiles/includes/*.bash; do
