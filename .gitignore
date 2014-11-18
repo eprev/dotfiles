@@ -8,3 +8,7 @@ vim/doc/tags-ja
 vim/ruby/command-t/Makefile
 vim/ruby/command-t/ext.bundle
 vim/yankring_history_v2.txt
+vim/ftdetect/tmpl.vim
+vim/plugin/booking.vim
+vim/syntax/tmpl.vim
+
