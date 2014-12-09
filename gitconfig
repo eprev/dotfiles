@@ -112,5 +112,10 @@
     ### Snapshots
 
     snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+    ### Miscellaneous
+
+    open = "!vim -p $(git diff --name-only HEAD | sed 's,$(git rev-parse --show-prefix),,' | tr '\\n' ' ')"
+
 [push]
 	default = simple
