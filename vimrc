@@ -158,7 +158,7 @@
 " Comand mode key bindings {
 
     " Save a file as root
-    cmap W w !sudo tee % >/dev/null
+    cmap w! w !sudo tee % >/dev/null
     " Moves cursor
     cmap <C-a> <Home>
     cmap <C-e> <End>
