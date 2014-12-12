@@ -115,8 +115,8 @@
 
     ### Miscellaneous
 
-    open  = "!vim -p $(git diff --name-only HEAD | sed 's,$(git rev-parse --show-prefix),,' | tr '\\n' ' ')"
-    touch = "!touch -c $(git diff --name-only HEAD | sed 's,$(git rev-parse --show-prefix),,' | tr '\\n' ' ')"
+    open  = "!vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only HEAD | tr '\\n' ' ')"
+    touch = "!touch -c $(git diff --name-only HEAD | tr '\\n' ' ')"
 
 [push]
 	default = simple
