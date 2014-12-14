@@ -4,3 +4,6 @@
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "tmux/plugins/resurrect"]
+	path = tmux/plugins/resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
