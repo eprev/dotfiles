@@ -1,5 +1,7 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.bash_profile
 
+GIT_DIR=~/.dotfiles/.git WORK_TREE=~/.dotfiles/ git pull
+
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
