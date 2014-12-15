@@ -1,6 +1,6 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.bash_profile
 
-GIT_DIR=~/.dotfiles/.git WORK_TREE=~/.dotfiles/ git pull
+(cd ~/.dotfiles; git pull; git submodule init; git submodule update)
 
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
