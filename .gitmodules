@@ -10,3 +10,6 @@
 [submodule "tmux/plugins/open"]
 	path = tmux/plugins/open
 	url = https://github.com/tmux-plugins/tmux-open
+[submodule "tmux/plugins/copycat"]
+	path = tmux/plugins/copycat
+	url = https://github.com/tmux-plugins/tmux-copycat
