@@ -1,5 +1,13 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.functions
 
+function selfupdate() {
+    pushd ~/.dotfiles > /dev/null
+    git pull
+    git submodule init
+    git submodule update
+    popd > /dev/null
+}
+
 # Simple calculator
 function calc() {
     local result=""
