@@ -8,6 +8,10 @@ function selfupdate() {
     popd > /dev/null
 }
 
+function vgg() {
+    vim -p $(git grep -lIi "$@" | tr '\n' ' ')
+}
+
 # Simple calculator
 function calc() {
     local result=""
