@@ -160,6 +160,9 @@
     nmap <leader>U gewvU
     nmap <leader>L gewvu
 
+    " Exit to shell
+    nmap <leader>z :sh<cr>
+
     function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
