@@ -122,6 +122,9 @@
     imap <C-d> <Del>
     imap <C-h> <BS>
 
+    " Map the arrow keys to be based on display lines, not physical lines
+    " imap <Down> <Esc>gja
+    " imap <Up> <Esc>gka
 " }
 
 " Normal mode key bindings {
@@ -132,6 +135,10 @@
     nmap <c-s> :w<CR>
     " Toggle folding
     nnoremap <space> za
+
+    " Map the arrow keys to be based on display lines, not physical lines
+    map <Down> gj
+    map <Up> gk
 
     " Disable highlight
     map <silent> <leader><cr> :noh<cr>
@@ -144,6 +151,14 @@
     nmap <silent> <leader>vs :so $MYVIMRC<CR>
     " Toggle paste mode
     map <leader>pp :setlocal paste!<cr>
+
+    " Upper/lower word
+    nmap <leader>u viwU
+    nmap <leader>l viwu
+
+    " Upper/lower first char of word
+    nmap <leader>U gewvU
+    nmap <leader>L gewvu
 
     function! StripWhitespace()
         let save_cursor = getpos(".")
