@@ -34,7 +34,7 @@ function ggs() {
     shift
     local b="$1"
     shift
-    git grep -lzIE $a $@ | xargs -0 sed -i "" -E "s/$a/$b/"g
+    git grep -lzIE "$a" $@ | xargs -0 sed -i "" -E "s/$a/$b/"g
 }
 
 # Simple calculator
