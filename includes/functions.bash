@@ -8,8 +8,33 @@ function selfupdate() {
     popd > /dev/null
 }
 
+# find files that contain the string and open them in the editor
 function vgg() {
     vim -p $(git grep -lIi "$@" | tr '\n' ' ')
+}
+
+# find file by its name in the repository
+function gff() {
+    local root=$(git rev-parse --show-toplevel)
+    local rel="$(relpath "$PWD" "$root")/"
+    local files=$(git -C "$root" ls-files | grep -i "$1")
+    for file in $files; do
+        relpath "$file" "$rel"
+    done
+}
+
+function relpath () {
+    python -c "import os.path; print os.path.relpath('$1','${2:-$PWD}')"
+}
+
+# find (grep) and replace (sed) in the repository
+# example: ggs 'foo\(' 'bar(' -- src
+function ggs() {
+    local a="$1"
+    shift
+    local b="$1"
+    shift
+    git grep -lzIE $a $@ | xargs -0 sed -i "" -E "s/$a/$b/"g
 }
 
 # Simple calculator

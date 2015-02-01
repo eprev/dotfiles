@@ -63,7 +63,8 @@
     ### Finding files and content inside files (grep)
 
     # Find a file path in codebase:
-    f = "!git ls-files | grep -i"
+    f = "!git -C \"${GIT_PREFIX:-.}\" ls-files | grep -i"
+    ff = "!git ls-files | grep -i"
 
     # Search/grep your entire codebase for a string:
     grep = grep -Ii
