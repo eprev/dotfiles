@@ -1,11 +1,17 @@
-# https://raw.github.com/mathiasbynens/dotfiles/master/.functions
-
-function selfupdate() {
+function x-update() {
     pushd ~/.dotfiles > /dev/null
     git pull
     git submodule init
     git submodule update
     popd > /dev/null
+}
+
+function x-enable-locations() {
+    launchctl load ~/.dotfiles/lib/LocationChanger.plist
+}
+
+function x-disable-locations() {
+    launchctl unload ~/.dotfiles/lib/LocationChanger.plist
 }
 
 # find files that contain the string and open them in the editor
@@ -36,6 +42,8 @@ function ggs() {
     shift
     git grep -lzIE "$a" $@ | xargs -0 sed -i "" -E "s/$a/$b/"g
 }
+
+# https://raw.github.com/mathiasbynens/dotfiles/master/.functions
 
 # Simple calculator
 function calc() {

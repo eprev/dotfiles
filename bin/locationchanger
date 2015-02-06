@@ -25,7 +25,7 @@ fi
 if [ "x$NEW_LOCATION" != "x" -a "x$NEW_LOCATION" != "x$CURRENT_LOCATION" ]; then
     echo "Changing to $NEW_LOCATION"
     scselect "$NEW_LOCATION"
-    SCRIPT="$HOME/.dotfiles/locations/$NEW_LOCATION.sh"
+    SCRIPT="$HOME/.dotfiles/locations/$NEW_LOCATION"
     if [ -f $SCRIPT ]; then
         $SCRIPT
     fi
