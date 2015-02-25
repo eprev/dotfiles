@@ -176,6 +176,9 @@
     " Exit to shell
     nmap <leader>z :sh<cr>
 
+    " Paste from the system clipboard
+    nmap <leader>p "*p
+
     function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
@@ -244,6 +247,8 @@
     vnoremap < <gv
     vnoremap > >gv
 
+    " Copy to the system clipboard
+    vnoremap <leader>c "*y
 " }
 
 " Pathogen {
