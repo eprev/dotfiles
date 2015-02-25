@@ -93,6 +93,17 @@
     " Stop indenting when pasting
     set pastetoggle=<f2>
 
+    " Continue comments when pressing <Enter>
+    set formatoptions+=r
+    " Don't continue comments when pressing o/O
+    set formatoptions-=o 
+    " Recognize numbered lists when formatting
+    set formatoptions+=n 
+    " Use indent of second line in paragraph
+    set formatoptions+=2 
+    " Don't break long lines that were already too long
+    set formatoptions+=l 
+
 " }
 
 " Color scheme {
