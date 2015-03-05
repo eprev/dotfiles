@@ -1,6 +1,8 @@
 --recurse=yes
 --exclude=.git
 --exclude=node_modules
+--exclude=vendors
+--exclude=*.min.js
 
 --langdef=js
 --langmap=js:.js
