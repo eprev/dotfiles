@@ -93,7 +93,7 @@
     " Automatically change the current directory
     set autochdir
     " Look for ctags file in the parent directories
-    set tags=tags;
+    set tags=.tags;
     " Stop indenting when pasting
     set pastetoggle=<f2>
 
