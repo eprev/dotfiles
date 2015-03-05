@@ -277,17 +277,9 @@
 
 " }
 
-" Command-T {
+" Ctrl-P {
 
-    " Scan dot-directtories
-    let g:CommandTScanDotDirectories = 1
-    " Do not scan node_modules
-    let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
-    " Alt-hl move the cursor
-    let g:CommandTCursorLeftMap  = ['<Left>',  '<A-h>']
-    let g:CommandTCursorRightMap = ['<Right>', '<A-l>']
-    let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
-    let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|node_modules)$'
 
 " }
 
