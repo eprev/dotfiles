@@ -90,6 +90,10 @@
     set autoread
     " Hide buffers instead of closing them
     set hidden
+    " Automatically change the current directory
+    set autochdir
+    " Look for ctags file in the parent directories
+    set tags=tags;
     " Stop indenting when pasting
     set pastetoggle=<f2>
 
