@@ -22,6 +22,7 @@ else
     ln -s .dotfiles/tmux.conf .tmux.conf
     ln -s .dotfiles/vim .vim
     ln -s .dotfiles/vimrc .vimrc
+    ln -s .dotfiles/ctags .ctags
     # Install locationchanger
     mkdir -p /usr/local
     ln -s $HOME/.dotfiles/bin/locationchanger /usr/local/bin/locationchanger
