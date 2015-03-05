@@ -279,7 +279,12 @@
 
 " Ctrl-P {
 
-    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|node_modules)$'
+    let g:ctrlp_custom_ignore = '\v[\/](node_modules|\.(git|hg|svn|node_modules))$'
+    let g:ctrlp_map='<F3>'
+    nnoremap <leader>f :CtrlP<CR>
+    nnoremap <leader>b :CtrlPBuffer<CR>
+    nnoremap <leader>m :CtrlPMRUFiles<CR>
+    nnoremap <leader>t :CtrlPTag<CR>
 
 " }
 
