@@ -91,7 +91,7 @@
     " Hide buffers instead of closing them
     set hidden
     " Automatically change the current directory
-    set autochdir
+    " set autochdir
     " Look for ctags file in the parent directories
     set tags=tags;
     " Stop indenting when pasting
