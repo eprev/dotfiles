@@ -177,6 +177,15 @@
     nmap <leader>U gewvU
     nmap <leader>L gewvu
 
+    " Go to the last active tab
+    let g:lasttab = 1
+    nmap <leader>, :exe "tabn ".g:lasttab<cr>
+    autocmd TabLeave * let g:lasttab = tabpagenr()
+
+    " Switch between tabs
+    nmap <C-j> :tabp<CR>
+    nmap <C-k> :tabn<CR>
+
     " Exit to shell
     nmap <leader>z :sh<cr>
 
