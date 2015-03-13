@@ -225,6 +225,8 @@
         autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
+        " Markdown
+        autocmd BufNewFile,BufRead *.md set filetype=markdown
     endif
 
 " }
