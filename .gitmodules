@@ -16,3 +16,6 @@
 [submodule "tmux/plugins/yank"]
 	path = tmux/plugins/yank
 	url = https://github.com/tmux-plugins/tmux-yank
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
