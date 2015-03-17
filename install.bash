@@ -26,6 +26,8 @@ else
     # Install locationchanger
     mkdir -p /usr/local
     ln -s $HOME/.dotfiles/bin/locationchanger /usr/local/bin/locationchanger
+    cp lib/LocationChanger.plist ${HOME}/Library/LaunchAgents/
+    launchctl load ${HOME}/Library/LaunchAgents/LocationChanger.plist
 fi
 
 source $HOME/.bash_profile
