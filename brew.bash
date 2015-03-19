@@ -37,6 +37,7 @@ brew install ssh-copy-id
 brew install tree
 brew install ctags-exuberant
 brew install tmux
+brew install ffmpeg
 
 # Remove outdated versions from the cellar.
 brew cleanup
