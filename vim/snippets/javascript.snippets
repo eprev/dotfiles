@@ -67,28 +67,3 @@ snippet :f
 	${1:method_name}: function(${2:attribute}) {
 		${4}
 	}${3:,}
-
-# BOOKING
-
-# Experiment
-snippet exp
-	booking[sNSExperiments]['<TMPL_V b_experiment_hash_${1:`expand('%:r')`}>'] = (function (B, $) {
-
-		function initElse() {
-		}
-
-		function init() {
-		}
-
-		return {
-			initElse: initElse,
-			init: init
-		};
-
-	})(booking, jQuery);
-
-# If exp
-snippet ifexp
-	if (B.track.exp('<TMPL_V b_experiment_hash_${1:`expand('%:r')`}>')) {
-		${2}
-	}
