@@ -223,6 +223,8 @@
         autocmd FileType go compiler go
         " Treat .json files as .js
         autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+        " Auto-detect indent settings
+        autocmd BufReadPost * :DetectIndent
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
         " Markdown
