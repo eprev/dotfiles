@@ -221,14 +221,16 @@
         filetype on
         filetype indent on
         autocmd FileType go compiler go
+        " Markdown
+        autocmd BufNewFile,BufRead *.md set filetype=markdown
         " Treat .json files as .js
         autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+        " Treat .es files as .js
+        autocmd BufNewFile,BufRead *.es setfiletype javascript
         " Auto-detect indent settings
         autocmd BufReadPost * :DetectIndent
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
-        " Markdown
-        autocmd BufNewFile,BufRead *.md set filetype=markdown
     endif
 
 " }
