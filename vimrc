@@ -216,6 +216,9 @@
 
 " Automatic commands {
 
+    let g:detectindent_preferred_expandtab = 0
+    let g:detectindent_preferred_indent = 4
+
     if has("autocmd")
         " Enable file type detection
         filetype on
