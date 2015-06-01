@@ -90,6 +90,9 @@
     set autoread
     " Hide buffers instead of closing them
     set hidden
+    " Spell checking
+    set spell spelllang=en
+    set spellfile=~/.vim/spell/en.utf-8.add
     " Automatically change the current directory
     " set autochdir
     " Look for ctags file in the parent directories
