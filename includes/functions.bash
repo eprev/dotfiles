@@ -29,6 +29,18 @@ function gff() {
     done
 }
 
+# find file by its name in the repository and open them in the editor.
+function vgff() {
+    local root=$(git rev-parse --show-toplevel)
+    local rel="$(relpath "$PWD" "$root")/"
+    local files=$(git -C "$root" ls-files | grep -i "$1")
+    local args=""
+    for file in $files; do
+        args="$args $(relpath "$file" "$rel")"
+    done
+    vim -p $args
+}
+
 function relpath () {
     python -c "import os.path; print os.path.relpath('$1','${2:-$PWD}')"
 }
