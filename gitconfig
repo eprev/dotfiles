@@ -121,3 +121,7 @@
 
 [push]
 	default = simple
+[url "https://"]
+	insteadof = git@
+[url "https://github.com/"]
+	insteadof = git@github.com:
