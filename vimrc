@@ -217,30 +217,6 @@
 
 " }
 
-" Automatic commands {
-
-    let g:detectindent_preferred_expandtab = 1
-    let g:detectindent_preferred_indent = 4
-
-    if has("autocmd")
-        " Enable file type detection
-        filetype on
-        filetype indent on
-        autocmd FileType go compiler go
-        " Markdown
-        autocmd BufNewFile,BufRead *.md set filetype=markdown
-        " Treat .json files as .js
-        autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-        " Treat .es files as .js
-        autocmd BufNewFile,BufRead *.es setfiletype javascript
-        " Auto-detect indent settings
-        autocmd BufReadPost * :DetectIndent
-        " Use tabs for makefiles
-        autocmd FileType make setlocal noexpandtab
-    endif
-
-" }
-
 " Status line {
 
     set laststatus=2
@@ -316,6 +292,30 @@
 " Yankring {
 
     let g:yankring_history_dir = '~/.vim'
+
+" }
+
+" Automatic commands {
+
+    let g:detectindent_preferred_expandtab = 1
+    let g:detectindent_preferred_indent = 4
+
+    if has("autocmd")
+        " Enable file type detection
+        filetype on
+        filetype indent on
+        autocmd FileType go compiler go
+        " Markdown
+        autocmd BufNewFile,BufRead *.md set filetype=markdown
+        " Treat .json files as .js
+        autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+        " Treat .es files as .js
+        autocmd BufNewFile,BufRead *.es setfiletype javascript
+        " Auto-detect indent settings
+        autocmd BufReadPost * :DetectIndent
+        " Use tabs for makefiles
+        autocmd FileType make setlocal noexpandtab
+    endif
 
 " }
 
