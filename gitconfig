@@ -1,6 +1,12 @@
 [color]
     ui = auto
 
+[color "grep"]
+    selected = 8
+    filename = normal
+    linenumber = 8
+    separator = 8
+
 [user]
     name = Anton Eprev
     email = a.eprev@gmail.com
@@ -121,3 +127,7 @@
 
 [push]
 	default = simple
+[url "https://"]
+	insteadof = git@
+[url "https://github.com/"]
+	insteadof = git@github.com:
