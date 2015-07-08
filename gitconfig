@@ -74,7 +74,7 @@
 
     # Search/grep your entire codebase for a string:
     grep = grep -Ii
-    gr = grep -Ii
+    gre = grep -Ii --line-number --heading --break
 
     # Grep from root folder:
     gra = "!git grep"
