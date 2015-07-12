@@ -1,0 +1,3 @@
+setlocal suffixesadd=.scss
+
+

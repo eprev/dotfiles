@@ -302,8 +302,7 @@
 
     if has("autocmd")
         " Enable file type detection
-        filetype on
-        filetype indent on
+        filetype plugin indent on
         autocmd FileType go compiler go
         " Markdown
         autocmd BufNewFile,BufRead *.md set filetype=markdown

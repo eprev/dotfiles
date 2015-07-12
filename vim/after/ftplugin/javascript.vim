@@ -1,0 +1,2 @@
+setlocal suffixesadd=.js
+
