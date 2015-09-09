@@ -39,5 +39,8 @@ brew install ctags-exuberant
 brew install tmux
 brew install ffmpeg
 
+# Required by passbox
+brew install gpg
+
 # Remove outdated versions from the cellar.
 brew cleanup

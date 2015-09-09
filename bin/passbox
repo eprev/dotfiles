@@ -1,0 +1,496 @@
+#!/bin/bash
+#
+# Script for managing passwords in a symmetrically encrypted file using GnuPG.
+#
+# Copyright (C) 2015 Robert Bollons - All Rights Reserved
+# Permission to copy and modify is granted under the MIT license
+# Version 2.0.0
+# Licence: MIT
+
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+# Defaults
+PASSBOX=${PASSBOX_LOCATION:=~/passbox.gpg}
+GPG=gpg
+SEPERATOR="|"
+
+#######################################
+# HELPERS
+#######################################
+
+#######################################
+# Print an error message and then exit
+#######################################
+fail () {
+    local message="${1}"
+
+    echo "Error: ${message}";
+    exit 1
+}
+
+#######################################
+# Make sure required programs are installed and can be executed.
+#######################################
+check_deps () {
+    if [[ -z ${GPG} && ! -x ${GPG} ]] ; then
+      fail "GnuPG is not available"
+    fi
+}
+
+#######################################
+# Searches for an entry based on a given string (can be regex)
+#######################################
+search () {
+    local hasRecords=false
+    if [ ! -s "${PASSBOX}" ] ; then
+        fail "No passwords found"
+    fi
+    get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    while read -r line; do
+        split_line "${line}"
+        if [[ ${#pass_vals[@]} -gt 0 ]] ; then
+            echo
+            echo "Name: ${pass_vals[0]}"
+            echo "Username: ${pass_vals[1]}"
+            echo "Password: ${pass_vals[2]}"
+
+            # If there are >2 items in the array then there must be extra values
+            if [[ ${#pass_vals[@]} -gt 2 ]] ; then
+                for i in "${!pass_vals[@]}"
+                do
+                    # TODO: There could be a better way to do this e.g. start the loop at 2
+                    if [[ $i -gt 2 ]]; then
+
+                        # Split the additional values and echo them out
+                        split_extra_val "${pass_vals[i]}"
+                        echo "${extra_val[0]}: ${extra_val[1]}"
+                    fi
+                done
+            fi
+            hasRecords=true
+        fi
+    done < <(decrypt "${password}" | grep -i "$1")
+    if [ "$hasRecords" == false ]; then
+        fail "No entries found"
+    fi
+}
+
+#######################################
+# Generate a random password using GPG
+# Based on https://github.com/drduh/pwd.sh
+#######################################
+gen_pass () {
+    len=20
+    max=100
+    read -p "Password length? (default: ${len}, max: ${max}) " length
+    if [[ ${length} =~ ^[0-9]+$ ]] ; then
+        len=${length}
+    fi
+
+    # base64: 4 characters for every 3 bytes
+    ${GPG} --gen-random -a 0 "$((max * 3/4))" | cut -c -"${len}"
+}
+
+#######################################
+# Decrypt the password file with a given password
+#######################################
+decrypt () {
+    echo "${1}" | ${GPG} \
+        --decrypt --armor --batch \
+        --passphrase-fd 0 "${PASSBOX}" 2>/dev/null
+}
+
+#######################################
+#  Encrypt the file contents
+#######################################
+encrypt () {
+    ${GPG} \
+        --symmetric --armor --batch --yes \
+        --passphrase-fd 3 \
+        --output "${PASSBOX}" "${2}" 3< <(echo "${1}")
+}
+
+#######################################
+#  Remove an entry from the file contents
+#######################################
+strip_entry () {
+    local input="${1}"
+    local passname="${2}"
+    echo "${input}" | grep -v -e "^${passname}[${SEPERATOR}]"
+}
+
+#######################################
+#  Append an entry to the file contents
+#######################################
+append_entry () {
+    local input="${1}"
+    local new_entry="${2}"
+    ( echo "${input}";
+      echo "${new_entry}" )
+}
+
+#######################################
+#  Re-write the file
+#######################################
+write_entries () {
+    local input="${1}"
+    echo "${input}" |
+        grep -v -e "^[[:space:]]*$" |
+        encrypt "${gpgpass}" -
+
+    echo "Done";
+}
+
+#######################################
+# Prompts for new password details
+#######################################
+new_details () {
+    if [[ $# -gt 0 ]] ; then
+        passname="$1"
+    else
+        read -p "Name: " passname
+    fi
+
+    if [[ $# -gt 1 ]] ; then
+        read -p "Username (${2}): " username
+        if [[ -z "${username}" ]]; then
+            username="${2}"
+        fi
+    else
+        read -p "Username: " username
+    fi
+
+    read -p "Generate password? (y/n, default: y) " rand_pass
+    if [[ "${rand_pass}" =~ ^([nN][oO]|[nN])$ ]]; then
+        if [[ $# -gt 1 ]] ; then
+            get_pass "Enter password for \"${username}\" (${3}): " ; echo
+            if [[ -z ${password} ]] ; then
+                userpass="${3}"
+            else
+                userpass="$password"
+            fi
+        else
+            get_pass "Enter password for \"${username}\": " ; echo
+            if [[ -z ${password} ]] ; then
+                fail "No password provided"
+            else
+                userpass="${password}"
+            fi
+        fi
+    else
+        userpass=$(gen_pass)
+        echo "Password: ${userpass}"
+    fi
+}
+
+#######################################
+# Write to the password file
+#######################################
+write_pass () {
+    local gpgpass=$password
+    if [ -z "${userpass+x}" ] ; then
+        new_entry_string=""
+    else
+        new_entry_string="${passname}${SEPERATOR}${username}${SEPERATOR}${userpass}"
+    fi
+
+    if [ -z "${gpgpass+x}" ]; then
+        get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+        gpgpass=$password
+    fi
+
+    local result=$(decrypt "${password}")
+    result=$(strip_entry "${result}" "${passname}")
+    result=$(append_entry "${result}" "${new_entry_string}")
+    write_entries "${result}"
+}
+
+#######################################
+# Prompts for a password, hiding the contents with stars
+# Based on https://github.com/drduh/pwd.sh
+#######################################
+get_pass () {
+    local prompt="${1}"
+
+    password=''
+    while IFS= read -p "${prompt}" -r -s -n 1 char ; do
+        if [[ ${char} == $'\0' ]] ; then
+            break
+        elif [[ ${char} == $'\177' ]] ; then
+            if [[ -z "${password}" ]] ; then
+                prompt=""
+            else
+                prompt=$'\b \b'
+                password="${password%?}"
+            fi
+        else
+            prompt="*"
+            password+="${char}"
+        fi
+    done
+}
+
+#######################################
+# Splits a line based on the given seperator into an array
+#######################################
+split_line () {
+    local oldIFS=IFS
+    IFS="${SEPERATOR}" read -ra pass_vals <<< "$1"
+    IFS=$oldIFS
+}
+
+#######################################
+# Splits a line based on a colon into an array
+#######################################
+split_extra_val () {
+    local oldIFS=IFS
+    IFS=":" read -ra extra_val <<< "$1"
+    IFS=$oldIFS
+}
+
+#######################################
+# Gets an individual extra val key value pair from a line
+#######################################
+get_extra_val () {
+    local line="$1"
+
+    split_line "${line}"
+    if [[ ${#pass_vals[@]} -gt 2 ]] ; then
+        for i in "${!pass_vals[@]}"
+        do
+            # TODO: There could be a better way to do this e.g. start the loop at 2
+            if [[ $i -gt 2 ]]; then
+
+                # Split the additional values and echo them out
+                split_extra_val "${pass_vals[i]}"
+                if [[ "$2" = "${extra_val[0]}" ]]; then
+                    break
+                fi
+            fi
+        done
+    fi
+}
+
+#######################################
+# OPTION METHODS
+#######################################
+
+#######################################
+# Display the usage of the script
+#######################################
+_usage () {
+cat << EOF
+usage: $0 [action]
+
+Passbox - command line password manager utility
+
+ACTIONS
+   add-field     <entry name>               Update an existing entry to add additional fields to
+   delete        <entry name>               Remove an entry from the password database
+   get           <entry name>               Get a particular password entry by it's name
+   generate                                 Generate a new random password
+   new                                      Prompt to create a new passbox entry
+   remove-field  <entry name> <field name>  Update an existing entry to remove additional fields
+   search        <search pattern>           Search the password database for a particular string, returns all matchin entries
+   update        <entry name>               Update an existing entry in the password database
+EOF
+}
+
+#######################################
+# Search the password database for a given string and output the result
+#######################################
+_search () {
+    search "$1"
+}
+
+#######################################
+# Generate a random password
+#######################################
+_gen_pass () {
+    gen_pass
+}
+
+#######################################
+# Prompt to create a new entry in the pasword database
+#######################################
+_new () {
+    new_details &&
+        get_pass "Enter password to unlock ${PASSBOX}: " ;
+        echo &&
+        write_pass
+}
+
+#######################################
+# Update an existing entry in the datbase
+#######################################
+_update () {
+    local gpgpass=""
+
+    get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    gpgpass=${password}
+
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    split_line "${details}"
+    if [[ ${#pass_vals[@]} -gt 1 ]] ; then
+        new_details "${pass_vals[0]}" "${pass_vals[1]}" "${pass_vals[2]}" &&
+            password=$gpgpass &&
+            write_pass
+    else
+        fail "Could not find a password entry for '${1}'"
+    fi
+}
+
+#######################################
+# Get a single entry from the database based on the entries name
+#######################################
+_get () {
+    search "^$1[${SEPERATOR}]"
+    echo
+}
+
+#######################################
+# Deletes an entry from the database based on the entries name
+#######################################
+_delete () {
+    local gpgpass=""
+
+    get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    gpgpass=${password}
+
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    split_line "${details}"
+
+    if [[ ${#pass_vals[@]} == 0 ]] ; then
+        fail "Could not find a password entry for '${1}'"
+    fi
+
+    read -p "Are you sure you want to delete the entry for '${pass_vals[0]}'? (y/n, default: n) " confirm_delete
+    if [[ "${confirm_delete}" =~ ^([nN][oO]|[nN])$ ]]; then
+        echo "Delete aborted"
+        return 1
+    fi
+
+    passname=${pass_vals[0]} &&
+        password=$gpgpass &&
+        write_pass
+    echo "${passname}"
+}
+
+
+#######################################
+# Adds an additional field to an existing password entry
+#######################################
+_add_field () {
+    local gpgpass=""
+
+    get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    gpgpass=${password}
+
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    split_line "${details}"
+    if [[ ${#pass_vals[@]} -lt 2 ]]; then
+        fail "Could not find a password entry for '${1}'"
+    fi
+
+    passname="${pass_vals[0]}"
+    password=$gpgpass
+    read -p "Field Name: " field_name
+    read -p "Field Value: " field_value
+    new_entry_string="${details}${SEPERATOR}${field_name}:${field_value}"
+
+    local result=$(decrypt "${password}")
+    result=$(strip_entry "${result}" "${passname}")
+    result=$(append_entry "${result}" "${new_entry_string}")
+    write_entries "${result}"
+}
+
+#######################################
+# Removes an additional field to an existing password entry
+#######################################
+_remove_field () {
+    local gpgpass=""
+
+    get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    gpgpass=${password}
+
+    details=$(decrypt "${password}" | grep -i "^${1}[${SEPERATOR}]")
+    split_line "${details}"
+    if [[ ${#pass_vals[@]} -lt 1 ]]; then
+        fail "Could not find a password entry for '${1}'"
+    fi
+
+    passname="${pass_vals[0]}"
+    password=$gpgpass
+
+    get_extra_val "$details" "$2"
+    field_to_remove="|${extra_val[0]}:${extra_val[1]}"
+    new_entry_string="${details/${field_to_remove}/}"
+
+    local result=$(decrypt "${password}")
+    result=$(strip_entry "${result}" "${passname}")
+    result=$(append_entry "${result}" "${new_entry_string}")
+    write_entries "${result}"
+}
+
+# MAIN
+check_deps
+
+if [[ $# == 0 ]] ; then
+    _usage
+else
+    case $1 in
+        search)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify a string to search for"
+            fi
+            _search "$2"
+            ;;
+        get)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify the name of an entry to get"
+            fi
+            _get "$2"
+            ;;
+        generate|gen)
+            _gen_pass
+            ;;
+        new)
+            _new
+            ;;
+        update)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify the name of an entry to update"
+            fi
+            _update "$2"
+            ;;
+        delete)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify the name of an entry to delete"
+            fi
+            _delete "$2"
+            ;;
+        add-field)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify the name of an entry to add a field to"
+            fi
+            _add_field "$2"
+            ;;
+        remove-field)
+            if ! [ -n "${2+1}" ] ; then
+                fail "Please specify the name of an entry to remove a field from"
+            fi
+            if ! [ -n "${3+1}" ] ; then
+                fail "Please specify the name of a field to remove"
+            fi
+            _remove_field "$2" "$3"
+            ;;
+        --help|help)
+            _usage
+            ;;
+        *)
+            _usage
+            ;;
+    esac
+fi
