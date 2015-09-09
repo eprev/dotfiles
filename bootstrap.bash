@@ -5,7 +5,7 @@ export TERM=xterm-256color
 
 export PATH=$HOME/.dotfiles/bin/:$PATH
 
-export PASSBOX_LOCATION=$HOME/Dropbox/passwords.gpg
+export PASSBOX_LOCATION=$HOME/Dropbox/.passwords.gpg
 
 for file in $HOME/.dotfiles/includes/*.bash; do
     [ -r "$file" ] && source "$file"
