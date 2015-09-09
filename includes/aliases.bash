@@ -32,6 +32,7 @@ alias t="tmux"
 alias s="subl ."
 alias o="open"
 alias oo="open ."
+alias pb="passbox"
 
 alias grep='GREP_COLOR="1;37;45" LANG=C grep --color=auto'
 alias ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"

@@ -14,6 +14,22 @@ function x-disable-locations() {
     launchctl unload ~/.dotfiles/lib/LocationChanger.plist
 }
 
+# copy password to the clipboard
+function pc() {
+    local password=$(passbox get $1 | grep 'Password')
+    if [[ "$password" == "" ]]; then
+        echo -e "\nNo entries found!"
+    else
+        echo "$password" \
+            | cut -d : -f 2 \
+            | sed -E 's/^[[:space:]]*|[[:space:]]*$//g' \
+            | awk 'NR > 1 { print prev } { prev=$0 } END { ORS=""; print }' \
+            | pbcopy \
+            > /dev/null 2>&1
+        echo -e "\nPassword has been copied to the clipboard!"
+    fi
+}
+
 # find files that contain the string and open them in the editor
 function vgg() {
     vim -p $(git grep -lIi "$@" | tr '\n' ' ')
