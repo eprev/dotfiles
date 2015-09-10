@@ -21,3 +21,5 @@ In addition, the following steps may be required when you want:
     ```
     curl -L https://github.com/eprev/locationchanger/raw/master/locationchanger.sh | bash
     ```
+
+* Like the font in the screenshot? [Input Font](http://input.fontbureau.com/).
