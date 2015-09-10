@@ -1,6 +1,7 @@
 # ~/.*
 
 ![](screenshot.png)
+![](screenshot-vim.png)
 
 Install/Update:
 
