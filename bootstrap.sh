@@ -7,7 +7,7 @@ export PATH=$HOME/.dotfiles/bin/:$PATH
 
 export PASSBOX_LOCATION=$HOME/Dropbox/.passwords.gpg
 
-for file in $HOME/.dotfiles/includes/*.bash; do
+for file in $HOME/.dotfiles/includes/*.sh; do
     [ -r "$file" ] && source "$file"
 done
 unset file

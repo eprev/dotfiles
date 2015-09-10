@@ -14,7 +14,7 @@ else
     if [ -f $HOME/.bashrc ] || [ -h $HOME/.bashrc ]; then
         mv $HOME/.bashrc $HOME/.bashrc.before-dotfiles;
     fi
-    echo "source ~/.dotfiles/bootstrap.bash" >> $HOME/.bash_profile
+    echo "source ~/.dotfiles/bootstrap.sh" >> $HOME/.bash_profile
     cp $HOME/.dotfiles/bashrc $HOME/.bashrc
     ln -s .dotfiles/gitconfig .gitconfig
     ln -s .dotfiles/gitignore .gitignore
@@ -23,11 +23,6 @@ else
     ln -s .dotfiles/vim .vim
     ln -s .dotfiles/vimrc .vimrc
     ln -s .dotfiles/ctags .ctags
-    # Install locationchanger
-    mkdir -p /usr/local
-    ln -s $HOME/.dotfiles/bin/locationchanger /usr/local/bin/locationchanger
-    cp lib/LocationChanger.plist ${HOME}/Library/LaunchAgents/
-    launchctl load ${HOME}/Library/LaunchAgents/LocationChanger.plist
 fi
 
 source $HOME/.bash_profile
