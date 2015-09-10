@@ -39,7 +39,7 @@
     " Enable syntax highlighting
     syntax on
     " Syntax coloring lines that are too long just slows down the world
-    set synmaxcol=256
+    set synmaxcol=512
     " Highlight current line
     set cursorline
     " Use spaces instead of tabs
@@ -130,21 +130,21 @@
     " Moves cursor
     imap <C-e> <End>
     imap <C-a> <Home>
-    imap <M-b> <C-o>b
-    imap <M-f> <C-o>e<Right>
-    noremap! <A-h> <Left>
-    noremap! <A-j> <Down>
-    noremap! <A-k> <Up>
-    noremap! <A-l> <Right>
-    inoremap <A-b> <C-o>b
-    inoremap <A-w> <C-o>w
+    " <M-b> & <M-w>
+    imap ∫ <C-o>b
+    imap ∑ <C-o>e<Right>
     " Delete and backspace
     imap <C-d> <Del>
     imap <C-h> <BS>
 
+    " Toggle wrapping mode
+    imap <F3> <C-o>:setlocal wrap!<CR>
+    " Toggle spell check
+    imap <F4> <C-o>:setlocal spell! spelllang=en<CR>
+
     " Map the arrow keys to be based on display lines, not physical lines
-    " imap <Down> <Esc>gja
-    " imap <Up> <Esc>gka
+    imap <Down> <Esc>gja
+    imap <Up> <Esc>gka
 " }
 
 " Normal mode key bindings {
@@ -155,6 +155,11 @@
     nmap <c-s> :w<CR>
     " Toggle folding
     nnoremap <space> za
+
+    " Toggle wrapping mode
+    map <F3> :setlocal wrap!<CR>
+    " Toggle spell check
+    map <F4> :setlocal spell! spelllang=en<CR>
 
     " Map the arrow keys to be based on display lines, not physical lines
     map <Down> gj
@@ -189,6 +194,12 @@
     nmap <C-j> :tabp<CR>
     nmap <C-k> :tabn<CR>
 
+    " Map <M-h,j,k,l> to resize windows
+    nmap <silent> ˙ <C-w><
+    nmap <silent> ∆ <C-W>-
+    nmap <silent> ˚ <C-W>+
+    nmap <silent> ¬ <C-w>>
+
     " Exit to shell
     nmap <leader>z :sh<cr>
 
@@ -205,10 +216,10 @@
 
 " }
 
-" Comand mode key bindings {
+" Command mode key bindings {
 
     " Save a file as root
-    cmap w! w !sudo tee % >/dev/null
+    cmap w!! w !sudo tee % >/dev/null
     " Moves cursor
     cmap <C-a> <Home>
     cmap <C-e> <End>

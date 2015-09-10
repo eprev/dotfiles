@@ -1,7 +1,6 @@
 # ~/.*
 
 ![](screenshot.png)
-![](screenshot-vim.png)
 
 Install/Update:
 
@@ -9,10 +8,10 @@ Install/Update:
 curl -L https://github.com/eprev/dotfiles/raw/master/install.bash | bash
 ```
 
-Additional steps are required to use VIM with the following plugins.
+In addition, the following steps may be required when you want:
 
-To use [TagBar](http://majutsushi.github.io/tagbar/) you need to install exuberant-ctags.
+* To use [TagBar](http://majutsushi.github.io/tagbar/) you need to install exuberant-ctags:
 
-```
-brew install ctags-exuberant
-```
+    ```
+    brew install ctags-exuberant
+    ```
