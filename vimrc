@@ -138,9 +138,9 @@
     imap <C-h> <BS>
 
     " Toggle wrapping mode
-    imap <F3> <C-o>:setlocal wrap!<CR>
+    imap <F4> <C-o>:setlocal wrap!<CR>
     " Toggle spell check
-    imap <F4> <C-o>:setlocal spell! spelllang=en<CR>
+    imap <F5> <C-o>:setlocal spell! spelllang=en<CR>
 
     " Map the arrow keys to be based on display lines, not physical lines
     imap <Down> <Esc>gja
@@ -157,9 +157,9 @@
     nnoremap <space> za
 
     " Toggle wrapping mode
-    map <F3> :setlocal wrap!<CR>
+    map <F4> :setlocal wrap!<CR>
     " Toggle spell check
-    map <F4> :setlocal spell! spelllang=en<CR>
+    map <F5> :setlocal spell! spelllang=en<CR>
 
     " Map the arrow keys to be based on display lines, not physical lines
     map <Down> gj
