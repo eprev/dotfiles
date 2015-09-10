@@ -1,11 +1,7 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.aliases
 
-# Easier navigation: .., ..., ...., ....., ~ and -
+# Easier navigation: .. and -
 alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Sublime
@@ -27,7 +23,6 @@ alias gp="while true; do git pull || break; git push && break; done"
 alias h="history"
 alias j="jobs"
 alias v="vim"
-alias m="mate ."
 alias t="tmux"
 alias s="subl ."
 alias o="open"
@@ -53,7 +48,7 @@ alias l="ls -l ${colorflag}"
 alias la="ls -la ${colorflag}"
 
 # List only directories
-alias lsd='ls -l ${colorflag} | grep "^d"'
+alias lsd='ls -l ${colorflag} | grep --color=never "^d"'
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
@@ -118,11 +113,6 @@ alias spoton="sudo mdutil -a -i on"
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 # (useful when executing time-consuming commands)
 alias badge="tput bel"
-
-# Intuitive map function
-# For example, to list all directories that contain a certain file:
-# find . -name .gitattributes | map dirname
-# alias map="xargs -n1"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
