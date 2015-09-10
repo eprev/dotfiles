@@ -15,3 +15,8 @@ In addition, the following steps may be required when you want:
     ```
     brew install ctags-exuberant
     ```
+* You might want to try [locationchanger](https://github.com/eprev/locationchanger):
+
+    ```
+    curl -L https://github.com/eprev/locationchanger/raw/master/locationchanger.sh | bash
+    ```
