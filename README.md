@@ -19,4 +19,4 @@ In addition, the following steps may be required:
 
 * You might want to try [locationchanger](https://github.com/eprev/locationchanger).
 
-* Like the font in the screenshot? It's [Input Font](http://input.fontbureau.com/).
+* Like the font in the screenshot? It's [Input Font](http://input.fontbureau.com/) (InputMonoCondensed-Light, 13pt).
