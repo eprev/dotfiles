@@ -124,6 +124,7 @@
 
     open  = "!vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only HEAD | tr '\\n' ' ')"
     touch = "!touch -c $(git diff --name-only HEAD | tr '\\n' ' ')"
+    age = "!git for-each-ref --sort=committerdate --format='%(refname:short) * %(authorname) * %(committerdate:relative)' refs/remotes/ | column -t -s '*'"
 
 [push]
 	default = simple
