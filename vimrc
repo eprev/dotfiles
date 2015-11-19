@@ -206,6 +206,11 @@
     " Paste from the system clipboard
     nmap <leader>p "*p
 
+    " Aligning
+    nmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    " nmap <Leader>a: :Tabularize /:\zs<CR>
+
     function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
@@ -213,6 +218,33 @@
         call setpos('.', save_cursor)
         call setreg('/', old_query)
     endfunction
+
+" }
+
+" Visual mode {
+
+    " Pressing * or # searches for the current selection
+    function! s:VSetSearch()
+        let temp = @@
+        norm! gvy
+        let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+        let @@ = temp
+    endfunction
+
+    vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+    vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+    " Visual shifting (does not exit Visual mode)
+    vnoremap < <gv
+    vnoremap > >gv
+
+    " Copy to the system clipboard
+    vnoremap <leader>c "*y
+
+    " Aligning
+    vmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+    " vmap <Leader>a: :Tabularize /:\zs<CR>
 
 " }
 
@@ -240,27 +272,6 @@
     set statusline+=%-14(%l,%c%) " Line, Character
     set statusline+=%<%p%%       " File position
 
-" }
-
-" Visual mode {
-
-    " Pressing * or # searches for the current selection
-    function! s:VSetSearch()
-        let temp = @@
-        norm! gvy
-        let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-        let @@ = temp
-    endfunction
-
-    vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
-    vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
-
-    " Visual shifting (does not exit Visual mode)
-    vnoremap < <gv
-    vnoremap > >gv
-
-    " Copy to the system clipboard
-    vnoremap <leader>c "*y
 " }
 
 " Pathogen {
