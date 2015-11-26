@@ -111,6 +111,9 @@
     " Don't break long lines that were already too long
     set formatoptions+=l
 
+    " Don't add styling for HTML (eg. underline links)
+    let html_no_rendering=1
+
 " }
 
 " Color scheme {
