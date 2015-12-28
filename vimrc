@@ -114,6 +114,9 @@
     " Don't add styling for HTML (eg. underline links)
     let html_no_rendering=1
 
+    " The maximum number of tabs Vim will open on startup
+    set tabpagemax=32
+
 " }
 
 " Color scheme {
