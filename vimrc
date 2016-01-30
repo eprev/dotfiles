@@ -39,7 +39,7 @@
     " Enable syntax highlighting
     syntax on
     " Syntax coloring lines that are too long just slows down the world
-    set synmaxcol=512
+    set synmaxcol=196
     " Highlight current line
     set cursorline
     " Use spaces instead of tabs
@@ -332,6 +332,10 @@
         " Don't highlight the current line if entering another window
         autocmd WinEnter * set cursorline
         autocmd WinLeave * set nocursorline
+
+        " Keep folds layout
+        autocmd BufWinLeave * mkview
+        autocmd BufWinEnter * silent loadview
 
         " Enable file type detection
         filetype plugin indent on
