@@ -14,6 +14,9 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+# Install Brew Cask
+brew tap caskroom/cask
+
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 
@@ -44,3 +47,13 @@ brew install gpg
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Other tools
+brew install youtube-dl
+
+# Installing Quick Look plugins
+# See https://github.com/sindresorhus/quick-look-plugins
+brew cask install qlcolorcode
+#brew cask install qlstephen
+brew cask install qlmarkdown
+brew cask install webpquicklook
