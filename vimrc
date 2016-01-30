@@ -329,6 +329,10 @@
     let g:detectindent_preferred_indent = 4
 
     if has("autocmd")
+        " Don't highlight the current line if entering another window
+        autocmd WinEnter * set cursorline
+        autocmd WinLeave * set nocursorline
+
         " Enable file type detection
         filetype plugin indent on
         autocmd FileType go compiler go
