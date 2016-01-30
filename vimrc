@@ -334,8 +334,8 @@
         autocmd WinLeave * set nocursorline
 
         " Keep folds layout
-        autocmd BufWinLeave * mkview
-        autocmd BufWinEnter * silent loadview
+        autocmd BufWinLeave ?* mkview
+        autocmd BufWinEnter ?* silent loadview
 
         " Enable file type detection
         filetype plugin indent on
