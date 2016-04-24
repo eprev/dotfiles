@@ -36,6 +36,7 @@ brew install vim --override-system-vi
 brew install ack
 # brew install git
 brew install imagemagick --with-webp
+brew install potrace
 brew install ssh-copy-id
 brew install tree
 brew install ctags-exuberant

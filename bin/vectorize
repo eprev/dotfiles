@@ -1,0 +1,16 @@
+#!/bin/bash
+
+usage () {
+cat << EOF
+Usage: $0 <file> [options]
+EOF
+}
+
+if [[ $# == 0 ]] ; then
+    usage
+else
+    input=$1
+    output="${input%.*}.svg"
+    shift
+    convert -alpha remove $input pgm: | mkbitmap $@ - -o - | potrace --svg -o $output
+fi
