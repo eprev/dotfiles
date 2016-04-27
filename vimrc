@@ -217,6 +217,9 @@
     nmap <Leader>a: :Tabularize /:<CR>
     " nmap <Leader>a: :Tabularize /:\zs<CR>
 
+    " CSS Sorting
+    nmap <Leader>cs :CSSSorting<CR>
+
     function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
@@ -251,6 +254,9 @@
     vmap <Leader>a= :Tabularize /=<CR>
     vmap <Leader>a: :Tabularize /:<CR>
     " vmap <Leader>a: :Tabularize /:\zs<CR>
+
+    " CSS Sorting
+    vmap <Leader>cs :CSSSorting<CR>
 
 " }
 
