@@ -149,8 +149,8 @@
     imap <F5> <C-o>:setlocal spell! spelllang=en<CR>
 
     " Map the arrow keys to be based on display lines, not physical lines
-    imap <Down> <Esc>gja
-    imap <Up> <Esc>gka
+    " imap <Down> <Esc>gja
+    " imap <Up> <Esc>gka
 " }
 
 " Normal mode key bindings {
