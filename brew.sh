@@ -42,6 +42,7 @@ brew install tree
 brew install ctags-exuberant
 brew install tmux
 brew install ffmpeg
+brew install qpdf
 
 # Required by passbox
 brew install gpg
