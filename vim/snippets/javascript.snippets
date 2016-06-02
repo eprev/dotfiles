@@ -67,3 +67,23 @@ snippet :f
 	${1:method_name}: function(${2:attribute}) {
 		${4}
 	}${3:,}
+
+
+# React
+snippet comp
+	class ${1:ComponentName} extends Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+			};
+		}
+		render() {
+			return (
+				${2:/* JSX */}
+			);
+		}
+	}
+
+snippet cwm
+	componentWillMount() {
+	}
