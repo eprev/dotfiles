@@ -3,13 +3,9 @@
 if [ -d $HOME/.dotfiles ]; then
     cd $HOME/.dotfiles
     git pull origin master
-    git submodule init
-    git submodule update
 else
     git clone https://github.com/eprev/dotfiles.git $HOME/.dotfiles
     pushd .dotfiles
-    git submodule init
-    git submodule update
     popd
     if [ -f $HOME/.bashrc ] || [ -h $HOME/.bashrc ]; then
         mv $HOME/.bashrc $HOME/.bashrc.before-dotfiles;
