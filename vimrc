@@ -329,6 +329,13 @@
 
 " }
 
+" JSX {
+
+    " Enable JSX syntax highlighting & indenting for .js files
+    let g:jsx_ext_required = 0
+
+" }
+
 " Automatic commands {
 
     let g:detectindent_preferred_expandtab = 1
