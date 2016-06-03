@@ -10,15 +10,15 @@ else
     if [ -f $HOME/.bashrc ] || [ -h $HOME/.bashrc ]; then
         mv $HOME/.bashrc $HOME/.bashrc.before-dotfiles;
     fi
-    echo "source ~/.dotfiles/bootstrap.sh" >> $HOME/.bash_profile
-    cp $HOME/.dotfiles/bashrc $HOME/.bashrc
-    ln -s .dotfiles/gitconfig .gitconfig
-    ln -s .dotfiles/gitignore .gitignore
-    ln -s .dotfiles/inputrc .inputrc
-    ln -s .dotfiles/tmux.conf .tmux.conf
-    ln -s .dotfiles/vim .vim
-    ln -s .dotfiles/vimrc .vimrc
-    ln -s .dotfiles/ctags .ctags
+    echo "source ~/.dotfiles/bashrc" > $HOME/.bashrc
+    ln -siv .dotfiles/bash_profile .bash_profile
+    ln -siv .dotfiles/gitconfig .gitconfig
+    ln -siv .dotfiles/gitignore .gitignore
+    ln -siv .dotfiles/inputrc .inputrc
+    ln -siv .dotfiles/tmux.conf .tmux.conf
+    ln -siv .dotfiles/vim .vim
+    ln -siv .dotfiles/vimrc .vimrc
+    ln -siv .dotfiles/ctags .ctags
 fi
 
 source $HOME/.bash_profile
