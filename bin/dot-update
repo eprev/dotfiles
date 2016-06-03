@@ -3,6 +3,7 @@
 if [ -d $HOME/.dotfiles ]; then
     cd $HOME/.dotfiles
     git pull origin master
+    $HOME/.dotfiles/bin/dot-link-files
 else
     git clone https://github.com/eprev/dotfiles.git $HOME/.dotfiles
     grep -q "\.dotfiles/bashrc" $HOME/.bashrc || echo "source ~/.dotfiles/bashrc" >> $HOME/.bashrc
