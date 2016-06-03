@@ -6,7 +6,7 @@
 Install/Update:
 
 ```
-curl -L https://github.com/eprev/dotfiles/raw/master/bin/dot/install.sh | bash
+curl -L https://github.com/eprev/dotfiles/raw/master/bin/dot-update | bash
 ```
 
 In addition, the following steps may be required:
