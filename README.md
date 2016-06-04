@@ -17,7 +17,7 @@ dot-update
 
 In addition, the following steps may be required:
 
-* If you want to use [TagBar](http://majutsushi.github.io/tagbar/), you need to install exuberant-ctags (or simply run `dot-install-osx` on OS X):
+* If you want to use [TagBar](http://majutsushi.github.io/tagbar/), you need to install exuberant-ctags (or simply run `dot-install-osx`):
 
     ```
     brew install ctags-exuberant
