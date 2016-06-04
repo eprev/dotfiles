@@ -3,16 +3,10 @@
 ![](screenshot.png)
 ![](screenshot-vim.png)
 
-Install:
+## Setup
 
 ```
 curl -L https://github.com/eprev/dotfiles/raw/master/bin/dot-install | bash
-```
-
-Update:
-
-```
-dot-update
 ```
 
 In addition, the following steps may be required:
@@ -26,3 +20,9 @@ In addition, the following steps may be required:
 * You might want to try [locationchanger](https://github.com/eprev/locationchanger).
 
 * Like the font in the screenshot? It's [Input Font](http://input.fontbureau.com/) (InputMonoCondensed-Light, 13pt).
+
+## Update
+
+```
+dot-update
+```
