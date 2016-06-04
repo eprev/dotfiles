@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
+# Install command-line tools using Homebrew, NPM and etc.
 
 # Ask for the administrator password upfront.
 sudo -v
@@ -59,3 +59,9 @@ brew cask install qlcolorcode
 #brew cask install qlstephen
 brew cask install qlmarkdown
 brew cask install webpquicklook
+
+# Installing Node.js
+brew install node
+
+# Installing postcss-sorting (used by Vim css-sorting)
+npm install -g postcss-cli postcss-sorting

@@ -3,10 +3,16 @@
 ![](screenshot.png)
 ![](screenshot-vim.png)
 
-Install/Update:
+Install:
 
 ```
-curl -L https://github.com/eprev/dotfiles/raw/master/bin/dot-update | bash
+curl -L https://github.com/eprev/dotfiles/raw/master/bin/dot-install | bash
+```
+
+Update:
+
+```
+dot-update
 ```
 
 In addition, the following steps may be required:
@@ -16,6 +22,8 @@ In addition, the following steps may be required:
     ```
     brew install ctags-exuberant
     ```
+
+Or simply run `dot-install-osx` (for OS X).
 
 * You might want to try [locationchanger](https://github.com/eprev/locationchanger).
 

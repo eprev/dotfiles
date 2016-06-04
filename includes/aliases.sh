@@ -1,5 +1,9 @@
 # https://raw.github.com/mathiasbynens/dotfiles/master/.aliases
 
+# dotfiles
+
+alias dot-update="dot-install"
+
 # Easier navigation: .. and -
 alias ..="cd .."
 alias -- -="cd -"
