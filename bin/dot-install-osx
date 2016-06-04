@@ -63,5 +63,5 @@ brew cask install webpquicklook
 # Installing Node.js
 brew install node
 
-# Installing postcss-sorting (used by Vim css-sorting)
+# Installing postcss-sorting (required by vim's css-sorting)
 npm install -g postcss-cli postcss-sorting
