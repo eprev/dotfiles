@@ -132,7 +132,7 @@
 " Insert mode key bindings {
 
     " Save file Ctrl-s
-    imap <c-s> <Esc>:w<CR>a
+    imap <C-s> <Esc>:w<CR>a
     " Moves cursor
     imap <C-e> <End>
     imap <C-a> <Home>
@@ -158,7 +158,7 @@
     " Remap 0 to first non-blank character
     map 0 ^
     " Save file Ctrl-s
-    nmap <c-s> :w<CR>
+    nmap <C-s> :w<CR>
     " Toggle folding
     nnoremap <space> za
 
@@ -173,8 +173,6 @@
 
     " Disable highlight
     map <silent> <leader><cr> :noh<cr>
-    " Strip trailing whitespace
-    noremap <leader>ss :call StripWhitespace()<CR>
     " Switch CWD to the directory of the open buffer
     map <leader>cd :cd %:p:h<cr>:pwd<cr>
     " Quickly edit/reload the vimrc file
@@ -220,6 +218,8 @@
     " CSS Sorting
     nmap <Leader>cs :CSSSorting<CR>
 
+    " Strip trailing whitespace
+    noremap <leader>ss :call StripWhitespace()<CR>
     function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
