@@ -1,4 +1,4 @@
-# copy password to the clipboard
+# Copy password to the system clipboard
 function pc() {
     local password=$(passbox get $1 | grep 'Password')
     if [[ "$password" == "" ]]; then
@@ -14,39 +14,32 @@ function pc() {
     fi
 }
 
-# find files that contain the string and open them in the editor
+# Find files that contain the string and open them in the editor
 function vgg() {
     vim -p $(git grep -lIi "$@" | tr '\n' ' ')
 }
 
-# find file by its name in the repository
+# Find files in the repository
 function gff() {
     local root=$(git rev-parse --show-toplevel)
-    local rel="$(relpath "$PWD" "$root")/"
     local files=$(git -C "$root" ls-files | grep -i "$1")
+    local rel="$(relpath "$PWD" "$root")/"
     for file in $files; do
         relpath "$file" "$rel"
     done
 }
 
-# find file by its name in the repository and open them in the editor.
+# Find files in the repository and open them in the editor
 function vgff() {
-    local root=$(git rev-parse --show-toplevel)
-    local rel="$(relpath "$PWD" "$root")/"
-    local files=$(git -C "$root" ls-files | grep -i "$1")
-    local args=""
-    for file in $files; do
-        args="$args $(relpath "$file" "$rel")"
-    done
-    vim -p $args
+    vim -p $(gff $@ | tr '\r' ' ')
 }
 
 function relpath () {
     python -c "import os.path; print os.path.relpath('$1','${2:-$PWD}')"
 }
 
-# find (grep) and replace (sed) in the repository
-# example: ggs 'foo\(' 'bar(' -- src
+# Find (grep) and replace (sed) text in the repository
+# Usage: `ggs 'foo\(' 'bar(' -- src`
 function ggs() {
     local a="$1"
     shift
@@ -54,8 +47,6 @@ function ggs() {
     shift
     git grep -lzIE "$a" $@ | xargs -0 -I '{}' sed -i -E "s/$a/$b/"g {}
 }
-
-# https://raw.github.com/mathiasbynens/dotfiles/master/.functions
 
 # Create a new directory and enter it
 function mkd() {
@@ -65,34 +56,6 @@ function mkd() {
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"
-}
-
-# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
-function targz() {
-    local tmpFile="${@%/}.tar"
-    tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
-
-    size=$(
-        stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
-        stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
-    )
-
-    local cmd=""
-    if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
-        # the .tar file is smaller than 50 MB and Zopfli is available; use it
-        cmd="zopfli"
-    else
-        if hash pigz 2> /dev/null; then
-            cmd="pigz"
-        else
-            cmd="gzip"
-        fi
-    fi
-
-    echo "Compressing .tar using \`${cmd}\`…"
-    "${cmd}" -v "${tmpFile}" || return 1
-    [ -f "${tmpFile}" ] && rm "${tmpFile}"
-    echo "${tmpFile}.gz created successfully."
 }
 
 # Determine size of a file or total size of a directory
@@ -144,15 +107,15 @@ function gz() {
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio"
 }
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-    if [ -t 0 ]; then # argument
-        python -mjson.tool <<< "$*" | pygmentize -l javascript
-    else # pipe
-        python -mjson.tool | pygmentize -l javascript
-    fi
-}
+# # Syntax-highlight JSON strings or files
+# # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+# function json() {
+#     if [ -t 0 ]; then # argument
+#         python -mjson.tool <<< "$*" | pygmentize -l javascript
+#     else # pipe
+#         python -mjson.tool | pygmentize -l javascript
+#     fi
+# }
 
 # All the dig info
 function digga() {
