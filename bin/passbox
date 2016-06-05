@@ -13,8 +13,10 @@ set -o pipefail
 
 # Defaults
 PASSBOX=${PASSBOX_LOCATION:=~/passbox.gpg}
-GPG=gpg
-SEPERATOR="|"
+GPG="$(command -v gpg2 || command -v gpg)"
+SEPARATOR="|"
+GPG_USEASYM="${PASSBOX_ASYMMETRIC:=false}"
+GPG_RECIPIENT="${PASSBOX_RECIPIENT:=}"
 
 #######################################
 # HELPERS
@@ -39,40 +41,55 @@ check_deps () {
     fi
 }
 
-#######################################
-# Searches for an entry based on a given string (can be regex)
-#######################################
-search () {
-    local hasRecords=false
+# ###############################################################################################
+# Retrieves password records matching search term which can be ether a string literal or a regex.
+# Matching records are stored in the $records global array. An individual record is a SEPARATOR
+# delimited string of the format:
+#   [name<SEPARATOR>username<SEPARATOR>password]
+# ###############################################################################################
+get_records () {
     if [ ! -s "${PASSBOX}" ] ; then
         fail "No passwords found"
     fi
     get_pass "Enter password to unlock ${PASSBOX}: " ; echo
+    fail_on_invalid_pass
+    records=();
     while read -r line; do
-        split_line "${line}"
-        if [[ ${#pass_vals[@]} -gt 0 ]] ; then
-            echo
-            echo "Name: ${pass_vals[0]}"
-            echo "Username: ${pass_vals[1]}"
-            echo "Password: ${pass_vals[2]}"
-
-            # If there are >2 items in the array then there must be extra values
-            if [[ ${#pass_vals[@]} -gt 2 ]] ; then
-                for i in "${!pass_vals[@]}"
-                do
-                    # TODO: There could be a better way to do this e.g. start the loop at 2
-                    if [[ $i -gt 2 ]]; then
-
-                        # Split the additional values and echo them out
-                        split_extra_val "${pass_vals[i]}"
-                        echo "${extra_val[0]}: ${extra_val[1]}"
-                    fi
-                done
-            fi
-            hasRecords=true
-        fi
+        records+=("${line}");
     done < <(decrypt "${password}" | grep -i "$1")
-    if [ "$hasRecords" == false ]; then
+}
+
+# #######################################################################
+# Formats and prints to standard output the password records stored
+# in the $records global array. Prints a failure message if null or empty
+# #######################################################################
+print_records () {
+    if [ ! -z "${records+1}" ] && [ ! ${#records[@]} -eq 0 ] ; then
+        for record in "${records[@]}"
+        do
+            split_line "${record}"
+            if [[ ${#pass_vals[@]} -gt 0 ]] ; then
+                echo
+                echo "Name: ${pass_vals[0]}"
+                echo "Username: ${pass_vals[1]}"
+                echo "Password: ${pass_vals[2]}"
+
+                # If there are >2 items in the array then there must be extra values
+                if [[ ${#pass_vals[@]} -gt 2 ]] ; then
+                    for l in "${!pass_vals[@]}"
+                    do
+                        # TODO: There could be a better way to do this e.g. start the loop at 2
+                        if [[ $l -gt 2 ]]; then
+
+                            # Split the additional values and echo them out
+                            split_extra_val "${pass_vals[l]}"
+                            echo "${extra_val[0]}: ${extra_val[1]}"
+                        fi
+                    done
+                fi
+            fi
+        done
+    else
         fail "No entries found"
     fi
 }
@@ -98,7 +115,7 @@ gen_pass () {
 #######################################
 decrypt () {
     echo "${1}" | ${GPG} \
-        --decrypt --armor --batch \
+        --decrypt --armor --batch --quiet  \
         --passphrase-fd 0 "${PASSBOX}" 2>/dev/null
 }
 
@@ -106,10 +123,31 @@ decrypt () {
 #  Encrypt the file contents
 #######################################
 encrypt () {
+    local recipient_switch=""
+    local enctype_switch="--symmetric"
+    local local_user_switch=""
+    local sign_switch=""
+
+    if [ "$GPG_USEASYM" == true ]; then
+        enctype_switch="--encrypt"
+        recipient_switch="--recipient=$GPG_RECIPIENT"
+        local_user_switch="--local-user=$GPG_RECIPIENT"
+        sign_switch="--sign"
+        if [[ "$GPG_RECIPIENT" == "" ]]; then
+            recipient_switch="--default-recipient-self"
+            local_user_switch=""
+        fi
+    fi
+
     ${GPG} \
-        --symmetric --armor --batch --yes \
+        $enctype_switch \
+        $recipient_switch \
+        $local_user_switch \
+        $sign_switch \
+        --armor --batch --yes \
         --passphrase-fd 3 \
         --output "${PASSBOX}" "${2}" 3< <(echo "${1}")
+
 }
 
 #######################################
@@ -118,7 +156,7 @@ encrypt () {
 strip_entry () {
     local input="${1}"
     local passname="${2}"
-    echo "${input}" | grep -v -e "^${passname}[${SEPERATOR}]"
+    echo "${input}" | grep -v -e "^${passname}[${SEPARATOR}]"
 }
 
 #######################################
@@ -140,7 +178,7 @@ write_entries () {
         grep -v -e "^[[:space:]]*$" |
         encrypt "${gpgpass}" -
 
-    echo "Done";
+    echo "Passbox saved";
 }
 
 #######################################
@@ -190,15 +228,20 @@ new_details () {
 #######################################
 write_pass () {
     local gpgpass=$password
+    local addlfields=${1:-}
     if [ -z "${userpass+x}" ] ; then
         new_entry_string=""
     else
-        new_entry_string="${passname}${SEPERATOR}${username}${SEPERATOR}${userpass}"
+        new_entry_string="${passname}${SEPARATOR}${username}${SEPARATOR}${userpass}${addlfields}"
     fi
 
     if [ -z "${gpgpass+x}" ]; then
         get_pass "Enter password to unlock ${PASSBOX}: " ; echo
         gpgpass=$password
+    fi
+
+    if [ -f $PASSBOX_LOCATION ]; then
+        fail_on_invalid_pass
     fi
 
     local result=$(decrypt "${password}")
@@ -210,6 +253,7 @@ write_pass () {
 #######################################
 # Prompts for a password, hiding the contents with stars
 # Based on https://github.com/drduh/pwd.sh
+# Argument $1 is the string to use for the prompt message
 #######################################
 get_pass () {
     local prompt="${1}"
@@ -233,11 +277,11 @@ get_pass () {
 }
 
 #######################################
-# Splits a line based on the given seperator into an array
+# Splits a line based on the given separator into an array
 #######################################
 split_line () {
     local oldIFS=IFS
-    IFS="${SEPERATOR}" read -ra pass_vals <<< "$1"
+    IFS="${SEPARATOR}" read -ra pass_vals <<< "$1"
     IFS=$oldIFS
 }
 
@@ -273,6 +317,11 @@ get_extra_val () {
     fi
 }
 
+
+fail_on_invalid_pass () {
+    decrypt "${password}" >/dev/null || fail "Incorrect password"
+}
+
 #######################################
 # OPTION METHODS
 #######################################
@@ -282,7 +331,7 @@ get_extra_val () {
 #######################################
 _usage () {
 cat << EOF
-usage: $0 [action]
+usage: $(basename "$0") [action]
 
 Passbox - command line password manager utility
 
@@ -302,7 +351,8 @@ EOF
 # Search the password database for a given string and output the result
 #######################################
 _search () {
-    search "$1"
+    get_records "$1"
+    print_records
 }
 
 #######################################
@@ -313,7 +363,7 @@ _gen_pass () {
 }
 
 #######################################
-# Prompt to create a new entry in the pasword database
+# Prompt to create a new entry in the password database
 #######################################
 _new () {
     new_details &&
@@ -323,20 +373,26 @@ _new () {
 }
 
 #######################################
-# Update an existing entry in the datbase
+# Update an existing entry in the database
 #######################################
 _update () {
     local gpgpass=""
+    local addlfields=""
 
     get_pass "Enter password to unlock ${PASSBOX}: " ; echo
     gpgpass=${password}
-
-    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    fail_on_invalid_pass
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPARATOR}]")
     split_line "${details}"
+    for i in "${!pass_vals[@]}"; do
+        if [[ $i -gt 2 ]]; then
+            addlfields="$addlfields$SEPARATOR${pass_vals[i]}"
+        fi
+    done
     if [[ ${#pass_vals[@]} -gt 1 ]] ; then
         new_details "${pass_vals[0]}" "${pass_vals[1]}" "${pass_vals[2]}" &&
             password=$gpgpass &&
-            write_pass
+            write_pass "$addlfields"
     else
         fail "Could not find a password entry for '${1}'"
     fi
@@ -346,7 +402,8 @@ _update () {
 # Get a single entry from the database based on the entries name
 #######################################
 _get () {
-    search "^$1[${SEPERATOR}]"
+    get_records "^$1[${SEPARATOR}]"
+    print_records
     echo
 }
 
@@ -358,8 +415,8 @@ _delete () {
 
     get_pass "Enter password to unlock ${PASSBOX}: " ; echo
     gpgpass=${password}
-
-    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    fail_on_invalid_pass
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPARATOR}]")
     split_line "${details}"
 
     if [[ ${#pass_vals[@]} == 0 ]] ; then
@@ -375,7 +432,6 @@ _delete () {
     passname=${pass_vals[0]} &&
         password=$gpgpass &&
         write_pass
-    echo "${passname}"
 }
 
 
@@ -387,8 +443,8 @@ _add_field () {
 
     get_pass "Enter password to unlock ${PASSBOX}: " ; echo
     gpgpass=${password}
-
-    details=$(decrypt "${password}" | grep -i "^$1[${SEPERATOR}]")
+    fail_on_invalid_pass
+    details=$(decrypt "${password}" | grep -i "^$1[${SEPARATOR}]")
     split_line "${details}"
     if [[ ${#pass_vals[@]} -lt 2 ]]; then
         fail "Could not find a password entry for '${1}'"
@@ -398,7 +454,7 @@ _add_field () {
     password=$gpgpass
     read -p "Field Name: " field_name
     read -p "Field Value: " field_value
-    new_entry_string="${details}${SEPERATOR}${field_name}:${field_value}"
+    new_entry_string="${details}${SEPARATOR}${field_name}:${field_value}"
 
     local result=$(decrypt "${password}")
     result=$(strip_entry "${result}" "${passname}")
@@ -414,8 +470,8 @@ _remove_field () {
 
     get_pass "Enter password to unlock ${PASSBOX}: " ; echo
     gpgpass=${password}
-
-    details=$(decrypt "${password}" | grep -i "^${1}[${SEPERATOR}]")
+    fail_on_invalid_pass
+    details=$(decrypt "${password}" | grep -i "^${1}[${SEPARATOR}]")
     split_line "${details}"
     if [[ ${#pass_vals[@]} -lt 1 ]]; then
         fail "Could not find a password entry for '${1}'"
