@@ -336,6 +336,14 @@
 
 " }
 
+" SnipMate {
+
+    " Don't conflict with supertab
+    :imap <C-J> <Plug>snipMateNextOrTrigger
+    :smap <C-J> <Plug>snipMateNextOrTrigger
+
+" }
+
 " Automatic commands {
 
     let g:detectindent_preferred_expandtab = 1
