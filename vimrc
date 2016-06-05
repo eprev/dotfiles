@@ -344,6 +344,13 @@
 
 " }
 
+" Supertab {
+
+    " Let it be smarter
+    let g:SuperTabDefaultCompletionType = "context"
+
+" }
+
 " Automatic commands {
 
     let g:detectindent_preferred_expandtab = 1
