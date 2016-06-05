@@ -1,12 +1,3 @@
-# update .dotfiles
-function dotfiles-update() {
-    pushd ~/.dotfiles > /dev/null
-    git pull
-    git submodule init
-    git submodule update
-    popd > /dev/null
-}
-
 # copy password to the clipboard
 function pc() {
     local password=$(passbox get $1 | grep 'Password')
