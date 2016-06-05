@@ -52,7 +52,7 @@ if [ -n "$PS1" ]; then
     [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | awk '{print $2}')" scp sftp ssh
 
     # Add `killall` tab completion for common apps
-    complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal TextMate" killall
+    complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Terminal" killall
 
     # If possible, add tab completion for many more commands
     # [ -f /etc/bash_completion ] && source /etc/bash_completion
