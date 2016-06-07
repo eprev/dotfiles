@@ -368,6 +368,7 @@
         " Enable file type detection
         filetype plugin indent on
         autocmd FileType go compiler go
+
         " Markdown
         autocmd BufNewFile,BufRead *.md set filetype=markdown
         " Treat .json files as .js
@@ -376,8 +377,12 @@
         autocmd BufNewFile,BufRead *.es setfiletype javascript
         " Auto-detect indent settings
         autocmd BufReadPost * :DetectIndent
+
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
+
+        " Use the default completion function for JavaScript
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     endif
 
 " }
