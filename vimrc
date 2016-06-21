@@ -348,6 +348,10 @@
 
     " Let it be smarter
     let g:SuperTabDefaultCompletionType = "context"
+    autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \ endif
 
 " }
 
@@ -380,9 +384,6 @@
 
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
-
-        " Use the default completion function for JavaScript
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     endif
 
 " }
