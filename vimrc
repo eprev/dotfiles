@@ -331,8 +331,8 @@
 
 " JSX {
 
-    " Enable JSX syntax highlighting & indenting for .js files
-    let g:jsx_ext_required = 0
+    " Enable JSX syntax highlighting & indenting only for .jsx files
+    let g:jsx_ext_required = 1
 
 " }
 
@@ -359,6 +359,7 @@
 
     let g:detectindent_preferred_expandtab = 1
     let g:detectindent_preferred_indent = 4
+    let g:detectindent_preferred_when_mixed = 1
 
     if has("autocmd")
         " Don't highlight the current line if entering another window
