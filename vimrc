@@ -289,7 +289,7 @@
 " Pathogen {
 
     let g:pathogen_disabled = []
-    " call add(g:pathogen_disabled, 'syntastic')
+    call add(g:pathogen_disabled, 'vim-jsx')
     execute pathogen#infect()
 
 " }
@@ -332,7 +332,7 @@
 " JSX {
 
     " Enable JSX syntax highlighting & indenting only for .jsx files
-    let g:jsx_ext_required = 1
+    " let g:jsx_ext_required = 1
 
 " }
 
