@@ -66,5 +66,8 @@ brew install node
 # Installing postcss-sorting (required by vim's css-sorting)
 npm install -g postcss-cli postcss-sorting
 
+# Installing JS tools
+npm install -g eslint
+
 # Installing jekyll
 gem install jekyll
