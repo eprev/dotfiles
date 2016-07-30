@@ -6,6 +6,7 @@ declare -a files=(
     bash_profile
     gitconfig
     gitignore
+    eslintrc
     inputrc
     tmux.conf
     vim
