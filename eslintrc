@@ -41,7 +41,7 @@
     "no-dupe-class-members": "error",
     "no-const-assign": "error",
     "no-class-assign": "error",
-    "constructor-superror": "error",
+    "constructor-super": "error",
     "no-undef": "error",
     "no-delete-var": "error",
     "no-unused-labels": "error",
