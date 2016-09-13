@@ -289,7 +289,7 @@
 " Pathogen {
 
     let g:pathogen_disabled = []
-    " call add(g:pathogen_disabled, 'syntastic')
+    call add(g:pathogen_disabled, 'vim-jsx')
     execute pathogen#infect()
 
 " }
@@ -297,7 +297,7 @@
 " Syntastic {
 
     let g:syntastic_check_on_open = 1
-    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_javascript_checkers = ['eslint']
 
 " }
 
@@ -331,8 +331,8 @@
 
 " JSX {
 
-    " Enable JSX syntax highlighting & indenting for .js files
-    let g:jsx_ext_required = 0
+    " Enable JSX syntax highlighting & indenting only for .jsx files
+    " let g:jsx_ext_required = 1
 
 " }
 
@@ -348,6 +348,10 @@
 
     " Let it be smarter
     let g:SuperTabDefaultCompletionType = "context"
+    autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \ endif
 
 " }
 
@@ -355,6 +359,7 @@
 
     let g:detectindent_preferred_expandtab = 1
     let g:detectindent_preferred_indent = 4
+    let g:detectindent_preferred_when_mixed = 1
 
     if has("autocmd")
         " Don't highlight the current line if entering another window
@@ -368,6 +373,7 @@
         " Enable file type detection
         filetype plugin indent on
         autocmd FileType go compiler go
+
         " Markdown
         autocmd BufNewFile,BufRead *.md set filetype=markdown
         " Treat .json files as .js
@@ -376,6 +382,7 @@
         autocmd BufNewFile,BufRead *.es setfiletype javascript
         " Auto-detect indent settings
         autocmd BufReadPost * :DetectIndent
+
         " Use tabs for makefiles
         autocmd FileType make setlocal noexpandtab
     endif
