@@ -284,6 +284,25 @@
     set statusline+=%-14(%l,%c%) " Line, Character
     set statusline+=%<%p%%       " File position
 
+    let s:status_line_off = 0
+    function! ToggleStatusLine()
+        if s:status_line_off == 0
+            let s:status_line_off = 1
+            set noshowmode
+            set noruler
+            set laststatus=0
+            set noshowcmd
+        else
+            let s:status_line_off = 0
+            set showmode
+            set ruler
+            set laststatus=2
+            set showcmd
+        endif
+    endfunction
+
+    nnoremap <silent> <leader>h :call ToggleStatusLine()<CR>
+
 " }
 
 " Pathogen {
