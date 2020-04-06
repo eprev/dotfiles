@@ -43,6 +43,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export FZF_DEFAULT_OPTS="--bind §:abort"
 # Use ripgrep in FZF
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Keep Catalina quiet.
 export BASH_SILENCE_DEPRECATION_WARNING=1

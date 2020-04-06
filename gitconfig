@@ -94,7 +94,7 @@
     cma = commit -a -m
     ca = commit --amend
     co = checkout
-    br = branch
+    br = for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
     diff = diff --word-diff
     dc = diff --cached
 
