@@ -367,6 +367,7 @@
     \ "coc-tsserver",
     \ "coc-eslint",
     \ "coc-vimlsp",
+    \ "coc-svelte",
     \ "coc-yank"
     \ ]
 
