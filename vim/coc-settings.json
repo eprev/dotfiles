@@ -12,7 +12,7 @@
     "typescript",
     "javascript",
     "typescriptreact",
-    "javascriptreact",
+    "javascriptreact"
   ],
   "coc.preferences.colorSupport": false,
   "yank.highlight.enable": false,

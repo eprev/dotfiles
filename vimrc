@@ -598,6 +598,8 @@ map <leader>mm :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> 
               \         '\C^xmlAttrib': {'sub': 'javascript'}}
               \ }
 
+  let g:vim_svelte_plugin_use_typescript = 1
+
 " }}}
 " Java {{{
 
