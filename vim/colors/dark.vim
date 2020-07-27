@@ -229,10 +229,10 @@ call s:HL('diffChange', 'gold',      'bg')
 " }}}
 " Spelling {{{
 
-call s:HL('SpellCap',   '', '', 'underline')
-call s:HL('SpellBad',   '', '', 'underline')
-call s:HL('SpellLocal', '', '', 'underline')
-call s:HL('SpellRare',  '', '', 'underline')
+call s:HL('SpellCap',   'black', 'orange', 'none')
+call s:HL('SpellBad',   'black', 'indianred', 'none')
+call s:HL('SpellLocal', 'black', 'orange', 'none')
+call s:HL('SpellRare',  'black', 'orange', 'none')
 
 " }}}
 " CoC {{{
