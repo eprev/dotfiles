@@ -1,8 +1,11 @@
 highlight link javaScriptFunction Keyword
 highlight link javaScriptGlobal Identifier
 highlight link javaScriptMember Identifier
-highlight link javascriptSvelteScript Identifier
+highlight link javaScriptType Identifier
+highlight link javaScriptIdentifier Keyword
 highlight link javaScriptMessage Identifier
+highlight link javaScriptEmbed Identifier
 highlight link javaScriptBraces Normal
 highlight link javaScriptOperator Operator
- highlight link javaScriptModule Identifier
+highlight link javaScriptModule Identifier
+highlight link javaScriptNumber Number
