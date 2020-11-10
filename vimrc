@@ -82,6 +82,7 @@
   set showmode
   " Show the filename in the window titlebar
   set title
+  let &titlestring ='VIM (%t@%{mode()})'
   " Show the (partial) command as it’s being typed
   set showcmd
   " Start scrolling three lines before the horizontal window border
@@ -384,8 +385,8 @@
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
 
-  " Use <c-o> to trigger completion.
-  inoremap <silent><expr> <c-o> coc#refresh()
+  " Use <c-l> to trigger completion.
+  inoremap <silent><expr> <c-l> coc#refresh()
 
   " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
   " Coc only does snippet and additional edit on confirm.
