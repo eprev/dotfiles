@@ -369,6 +369,7 @@
     \ "coc-eslint",
     \ "coc-vimlsp",
     \ "coc-svelte",
+    \ "coc-rls",
     \ "coc-yank"
     \ ]
 
