@@ -370,6 +370,7 @@
     \ "coc-vimlsp",
     \ "coc-svelte",
     \ "coc-rls",
+    \ "coc-pyright",
     \ "coc-yank"
     \ ]
 
