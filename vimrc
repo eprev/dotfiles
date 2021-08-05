@@ -248,6 +248,10 @@
   nnoremap <Leader>a= :Tabularize /=<CR>
   nnoremap <Leader>a: :Tabularize /:<CR>
 
+  nnoremap <Leader>q" ciw""<Esc>P
+  nnoremap <Leader>q' ciw''<Esc>P
+  nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
+
   " Strip trailing whitespace
   nnoremap <leader>ss :call StripWhitespace()<CR>
   function! StripWhitespace()
@@ -298,6 +302,8 @@
   vnoremap <Leader>a= :Tabularize /=<CR>
   vnoremap <Leader>a: :Tabularize /:<CR>
 
+  vnoremap <leader>q' c''<esc>P
+  vnoremap <leader>q" c""<esc>P
 " }}}
 " Command mode key bindings {
 
