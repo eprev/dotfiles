@@ -6,6 +6,7 @@
     "javascriptreact",
     "json",
     "css",
+    "python",
     "markdown"
   ],
   "eslint.filetypes": [
