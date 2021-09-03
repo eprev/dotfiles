@@ -299,6 +299,14 @@
   vnoremap <Leader>a: :Tabularize /:<CR>
 
 " }}}
+" Remote clipboard {{{
+
+  " Paste from the system clipboard
+  nmap <leader>p :r !ssh localhost -p 2244 pbpaste<CR>
+  " Copy to the system clipboard
+  vmap <leader>y y:e ~/clipboard<CR>:setlocal noeol<CR>p:w !ssh localhost -p 2244 pbcopy<CR>:bdelete!<CR><CR>
+
+" }}}
 " Command mode key bindings {
 
   " Alternative Esc (iPad)

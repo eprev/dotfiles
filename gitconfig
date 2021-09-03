@@ -28,7 +28,7 @@
 
 [user]
     name = Anton Eprev
-    email = a.eprev@gmail.com
+    email = eprev@me.com
 
 [include]
     path = ~/.gitconfig_local
