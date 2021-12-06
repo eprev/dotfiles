@@ -14,8 +14,12 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+# NodeJS
+brew install n
+n lts
+
 # Install Brew Cask
-brew tap caskroom/cask
+brew tap homebrew/cask
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
@@ -37,7 +41,7 @@ brew install vim --override-system-vi
 # Install other useful binaries.
 brew install ack
 # brew install git
-brew install imagemagick@6 --force --with-webp
+brew install imagemagick@6 --force
 brew link imagemagick@6 --force
 brew install gifsicle
 brew install potrace
@@ -67,12 +71,8 @@ brew cask install qlcolorcode
 brew cask install qlmarkdown
 brew cask install webpquicklook
 
-# Installing Node.js
-brew install node
+# NodeJS things
 brew install yarn
-
-# Installing N
-npm install -g n
 
 # Installing postcss-sorting (required by vim's css-sorting)
 npm install -g postcss-cli postcss-sorting
