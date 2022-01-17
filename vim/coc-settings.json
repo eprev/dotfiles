@@ -19,5 +19,13 @@
   "yank.highlight.enable": false,
   "list.insertMappings": {
     "§": "do:exit"
+  },
+  "languageserver": {
+    "zk": {
+      "command": "zk",
+      "args": ["lsp"],
+      "trace.server": "messages",
+      "filetypes": ["markdown"]
+    }
   }
 }

@@ -6,6 +6,7 @@ source $HOME/.bashrc
 export TERM=xterm-256color
 
 export PASSBOX_LOCATION="$HOME/Dropbox/.passwords.gpg"
+export ZK_NOTEBOOK_DIR="$HOME/Notes"
 
 export DOTFILES_PATH="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
