@@ -346,6 +346,22 @@
   let g:tagbar_autoclose = 1
 
 " }}}
+" ZK {{{
+
+  " User command to index the current notebook.
+  "
+  " zk.index expects a notebook path as first argument, so we provide the current
+  " buffer path with expand("%:p").
+  command! -nargs=0 ZkIndex :call CocAction("runCommand", "zk.index", expand("%:p"))
+  nnoremap <leader>zi :ZkIndex<CR>
+
+  " Note the concatenation with the "edit" command to open the note right away.
+  command! -nargs=? ZkNew :exec "edit ".CocAction("runCommand", "zk.new", expand("%:p"), <args>).path
+
+  " Create a new note after prompting for its title.
+  nnoremap <leader>zn :ZkNew {"title": input("Title: ")}<CR>
+
+" }}}
 " fzf {{{
   set runtimepath+=$DOTFILES_PATH/fzf
   nnoremap <leader>f :Files<CR>
