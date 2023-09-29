@@ -194,6 +194,8 @@
   nnoremap <F4> :setlocal wrap!<CR>
   " Toggle spell check
   nnoremap <F5> :setlocal spell! spelllang=en<CR>
+  " Toggle context mode
+  nnoremap <F6> :ContextToggle <CR>
   " Save and run make
   nnoremap <F9> :silent w<CR>:silent make<CR>:unsilent redraw!<CR>:cwindow<CR>
 

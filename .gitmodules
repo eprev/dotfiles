@@ -40,3 +40,6 @@
 [submodule "vim/pack/default/start/vim-svelte-plugin"]
 	path = vim/pack/default/start/vim-svelte-plugin
 	url = https://github.com/leafOfTree/vim-svelte-plugin
+[submodule "vim/pack/default/start/context"]
+	path = vim/pack/default/start/context
+	url = https://github.com/wellle/context.vim
