@@ -111,6 +111,9 @@
   " The maximum number of tabs Vim will open on startup
   set tabpagemax=16
 
+  " NFA engine for regexp
+  set regexpengine=2
+
   " Stop indenting when pasting
   set pastetoggle=<f2>
 

@@ -96,3 +96,6 @@ gem install bundler --user-install
 
 # Ripgrep
 brew install ripgrep
+
+# lets encrypt
+brew install certbot
