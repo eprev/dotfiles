@@ -27,5 +27,6 @@
       "trace.server": "messages",
       "filetypes": ["markdown"]
     }
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

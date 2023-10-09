@@ -400,6 +400,7 @@
     \ "coc-marketplace",
     \ "coc-prettier",
     \ "coc-sh",
+    \ "coc-snippets",
     \ "coc-tsserver",
     \ "coc-eslint",
     \ "coc-vimlsp",
@@ -654,6 +655,9 @@ map <leader>mm :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> 
   \ " FG<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#") . "> " .
   \ " BG<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"bg#") . ">" <CR>
 
+" }}}
+" Javascript {{{
+  let g:javascript_plugin_jsdoc = 1
 " }}}
 " Typescript {{{
 

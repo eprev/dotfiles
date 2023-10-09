@@ -43,3 +43,6 @@
 [submodule "vim/pack/default/start/context"]
 	path = vim/pack/default/start/context
 	url = https://github.com/wellle/context.vim
+[submodule "vim/pack/vim-javascript/start/vim-javascript"]
+	path = vim/pack/vim-javascript/start/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
