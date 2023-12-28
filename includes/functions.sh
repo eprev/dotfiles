@@ -167,17 +167,7 @@ unquarantine () {
 
 # Start an HTTP server from a directory, optionally specifying the port
 server () {
-    local port="${1:-8000}"
+    local port="${1:-3000}"
     sleep 1 && open "http://localhost:${port}/" &
-    # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-    # And serve everything as UTF-8 (although not technically correct, this doesn’t break
-    # anything for binary files)
-    python -c '
-import SimpleHTTPServer;
-map = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;
-map[""] = "text/plain";
-for key, value in map.items():
-    map[key] = value + ";charset=UTF-8";
-SimpleHTTPServer.test();
-    ' "$port"
+    python3 -m http.server "$port"
 }
