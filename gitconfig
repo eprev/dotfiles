@@ -123,6 +123,7 @@
 
 [push]
 	default = simple
+  autoSetupRemote = true
 
 [url "git@gitlab.booking.com:"]
 	insteadOf = https://gitlab.booking.com/
