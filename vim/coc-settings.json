@@ -29,5 +29,6 @@
     }
   },
   "snippets.ultisnips.pythonPrompt": false,
-  "svelte.enable-ts-plugin": false
+  "svelte.enable-ts-plugin": false,
+  "python.formatting.autopep8Path": "/Users/eprev/Library/Python/3.11/bin/autopep8"
 }

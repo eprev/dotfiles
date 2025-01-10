@@ -3,7 +3,7 @@
 export DOTFILES_PATH="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 export LANG=en_US.UTF-8
-export PATH=$DOTFILES_PATH/bin/:$HOME/.yarn/bin:$PATH
+export PATH=$DOTFILES_PATH/bin/:$HOME/.yarn/bin:$HOME/Library/Python/3.11/bin:$PATH
 
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
