@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 if [ -z "$DOTFILES_PATH" ]; then
   export DOTFILES_PATH=$HOME/.dotfiles
@@ -11,8 +11,7 @@ if [ -d "$DOTFILES_PATH" ]; then
 else
   echo "Installing to '$DOTFILES_PATH'..."
   git clone https://github.com/eprev/dotfiles.git $DOTFILES_PATH
-  echo "source $DOTFILES_PATH/bashrc" >> $HOME/.bashrc
-  echo "source $DOTFILES_PATH/bash_profile" >> $HOME/.bash_profile
+  echo "source $DOTFILES_PATH/zshrc" >> $HOME/.zshrc
   cd $DOTFILES_PATH
 fi
 
@@ -25,8 +24,8 @@ git submodule update
 # Install fzf
 hash fzf &>/dev/null
 if [ $? -ne 0 ]; then
-  $DOTFILES_PATH/fzf/install
+  $DOTFILES_PATH/fzf/install --no-bash --no-fish --no-update-rc --key-bindings --completion
 fi
 
 # Have fun!
-source $HOME/.bash_profile
+source $HOME/.zshrc

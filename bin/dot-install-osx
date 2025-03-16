@@ -1,6 +1,19 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env zsh
+#
 # Install command-line tools using Homebrew, NPM and etc.
+
+# homebrew
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  export PATH="/opt/homebrew/bin:$PATH"
+  eval "$(brew shellenv)"
+fi
+
+# node & pnpm
+if ! command -v node &> /dev/null; then
+  curl -fsSL https://get.pnpm.io/install.sh | sh -
+  pnpm env use --global lts
+fi
 
 # Ask for the administrator password upfront.
 sudo -v
@@ -17,85 +30,33 @@ brew upgrade
 # ZK
 brew install zk 
 
-# NodeJS
-brew install n
-n lts
-
-# Install Brew Cask
-brew tap homebrew/cask
-
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 brew install coreutils
 brew install grep
 
-# Install Bash 4.
-# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
-# running `chsh`.
-brew install bash
-brew install bash-completion
-
-# Install `wget` with IRI support.
-brew install wget --with-iri
-
-# Install more recent versions of some OS X tools.
-brew install vim --override-system-vi
-
-# Install other useful binaries.
+# # Install other useful binaries.
+brew install wget
 brew install ack
-# brew install git
-brew install imagemagick@6 --force
-brew link imagemagick@6 --force
-brew install gifsicle
+brew install imagemagick
+# brew install gifsicle
 brew install potrace
-brew install ssh-copy-id
+# brew install ssh-copy-id
 brew install tree
-brew install ctags-exuberant
+# brew install ctags-exuberant
 brew install tmux
 brew install jq
-brew install ffmpeg --with-libvpx
-brew install qpdf
+brew install ffmpeg
+# brew install qpdf
 brew install fswatch
-brew install reattach-to-user-namespace
-
-# Required by passbox
-brew install gpg
+brew install ripgrep
+# brew install reattach-to-user-namespace
 
 # Remove outdated versions from the cellar.
 brew cleanup
 
-# Other tools
-brew install youtube-dl
-
-# Installing Quick Look plugins
-# See https://github.com/sindresorhus/quick-look-plugins
-brew cask install qlcolorcode
-#brew cask install qlstephen
-brew cask install qlmarkdown
-brew cask install webpquicklook
-
-# NodeJS things
-brew install yarn
-
-# Installing postcss-sorting (required by vim's css-sorting)
-npm install -g postcss-cli postcss-sorting
-
 # Typescript
-npm -g install typescript
-
-# Installing JS tools
-npm install -g eslint
-npm install -g prettier
-
-# NPX
-npm install -g npx
-
-# Installing jekyll
-gem install jekyll --user-install
-gem install bundler --user-install
-
-# Ripgrep
-brew install ripgrep
+pnpm -g install typescript
 
 # lets encrypt
 brew install certbot

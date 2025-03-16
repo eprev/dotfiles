@@ -49,3 +49,6 @@
 [submodule "vim/pack/default/start/vim-easymotion"]
 	path = vim/pack/default/start/vim-easymotion
 	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "zsh/zsh-autosuggestions"]
+	path = zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
