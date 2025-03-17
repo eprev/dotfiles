@@ -2,20 +2,12 @@
 #
 # https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#Zsh-Modules
 
-# Better ssh, scp autocomplete {{{
-zstyle ':completion:*:(ssh|scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+# complete {{{
+autoload -Uz compinit && compinit
+# small letters match small and capital letters
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # }}}
 
-# Autocomplete {{{
-autoload -Uz compinit && compinit
-# Small letters match small and capital letters
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# Highlight the current autocomplete option
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# }}}
-#
 # promt config {{{
 setopt prompt_subst
 
