@@ -85,8 +85,6 @@ unset file
 source $DOTFILES_PATH/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # }}}
 
-export EDITOR="vim"
-
 # homebrew {{{
 if ! command -v brew &> /dev/null; then
   # detect liklely Homebrew installation directory

@@ -1,5 +1,7 @@
 # sh.vim: bash
 
+export TERM="xterm-256color"
+
 # Make vim the default editor
 export EDITOR="vim"
 
