@@ -122,6 +122,12 @@
   " Hide color column
   set colorcolumn=
 " }}}
+"
+" netrw {{{
+  " Hide Banner
+  let g:netrw_banner = 0
+" }}}
+"
 " Cursor {{{
 
   if &term =~ '^xterm\|rxvt'
@@ -139,6 +145,7 @@
   endif
 
 " }}}
+"
 " Color scheme {{{
 
   " True colors (works in TMUX)
@@ -150,6 +157,7 @@
   endtry
 
 " }}}
+"
 " Insert mode key bindings {{{
 
   " Alternative Esc (iPad)
@@ -185,6 +193,7 @@
   " inoremap <left> <nop>
   " inoremap <right> <nop>
 " }}}
+"
 " Normal mode key bindings {{{
 
   " Alternative Esc (iPad)
