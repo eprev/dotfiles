@@ -52,3 +52,6 @@
 [submodule "zsh/zsh-autosuggestions"]
 	path = zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "vim/pack/plugins/start/vim-tmux-navigator"]
+	path = vim/pack/plugins/start/vim-tmux-navigator
+	url = git@github.com:christoomey/vim-tmux-navigator.git
