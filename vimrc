@@ -322,12 +322,10 @@
   vnoremap <leader>q" c""<esc>P
 " }}}
 " Remote clipboard {{{
-
   " Paste from the system clipboard
-  nmap <leader>p :r !ssh localhost -p 2244 pbpaste<CR>
+  nmap <leader>p :r !pbpaste-remote<CR>
   " Copy to the system clipboard
-  vmap <leader>y y:e ~/clipboard<CR>:setlocal noeol<CR>p:w !ssh localhost -p 2244 pbcopy<CR>:bdelete!<CR><CR>
-
+  vmap <leader>y y:e ~/clipboard<CR>:setlocal noeol<CR>p:w !pbcopy-remote<CR>:bdelete!<CR><CR>
 " }}}
 " Command mode key bindings {
 
