@@ -347,11 +347,6 @@
   map <leader>e :edit %%
 
 " }}}
-" Yankring {{{
-
-  let g:yankring_history_dir = '~/.vim'
-
-" }}}
 " Tagbar {{{
 
   " Toggle Tagbar
@@ -557,6 +552,9 @@
   nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+  " Yank List
+  nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
   " Fix broken arrow keys
   " if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
