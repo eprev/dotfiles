@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+launchctl unload $DOTFILES_PATH/osx/Library/LaunchAgents/pbcopy.plist
+launchctl unload $DOTFILES_PATH/osx/Library/LaunchAgents/pbpaste.plist
+
