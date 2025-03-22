@@ -380,13 +380,11 @@
 
 " }}}
 " Ripgrep {{{
-  command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
-  nnoremap <leader>g :Rg<CR>
   if executable('rg')
+    command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob '!{.git,node_modules}/*' --color always ".shellescape(<q-args>), 1, <bang>0)
     set grepprg=rg\ --vimgrep\ --smart-case\ --no-column
   endif
-
+  nnoremap <leader>g :Rg<CR>
 " }}}
 " CoC {{{
 
