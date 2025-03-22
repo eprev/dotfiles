@@ -11,8 +11,11 @@ if [ -d "$DOTFILES_PATH" ]; then
 else
   echo "Installing to '$DOTFILES_PATH'..."
   git clone https://github.com/eprev/dotfiles.git $DOTFILES_PATH
-  echo "source $DOTFILES_PATH/zshrc" >> $HOME/.zshrc
   cd $DOTFILES_PATH
+fi
+
+if [ ! -f "$HOME/.zshrc" ]; then
+  echo "source $DOTFILES_PATH/zshrc" >> $HOME/.zshrc
 fi
 
 git submodule init
