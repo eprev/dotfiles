@@ -15,7 +15,7 @@
 
 3. In addition, the following steps may be required:
 
-   - If you want to use [TagBar](http://majutsushi.github.io/tagbar/), you need to install ctags-universal (or simply run `dot-install-osx`):
+   - If you want to use [TagBar](http://preservim.github.io/tagbar/), you need to install ctags-universal (or simply run `dot-install-osx`):
 
      ```
      brew install universal-ctags
