@@ -389,7 +389,7 @@
 " Ripgrep {{{
   if executable('rg')
     command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob '!{.git,node_modules}/*' --color always ".shellescape(<q-args>), 1, <bang>0)
-    set grepprg=rg\ --vimgrep\ --no-column
+    set grepprg=rg\ --vimgrep\ --no-column\ --smart-case
   endif
   nnoremap <leader>r :Rg<CR>
 " }}}
