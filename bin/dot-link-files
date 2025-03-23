@@ -18,6 +18,7 @@ declare -a files=(
   prettier
   gemrc
   ripgreprc
+  rgignore
 )
 
 for i in ${files[@]}; do

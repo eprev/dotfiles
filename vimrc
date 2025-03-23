@@ -385,15 +385,15 @@
   nnoremap <leader>t :Tags<CR>
   " git grep
   command! -bang -nargs=* Gg call fzf#vim#grep('git grep --line-number -- '.fzf#shellescape(<q-args>), 1, <bang>0)
-  nnoremap <leader>gg :Gg<CR>
+  nnoremap <leader>G :Gg<CR>
 
 " }}}
 " Ripgrep {{{
   if executable('rg')
-    command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob '!{.git,node_modules}/*' --color always ".shellescape(<q-args>), 1, <bang>0)
+    command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --color always '.shellescape(<q-args>), 1, {'options': '--exact --delimiter : --nth 4..'}, <bang>0)
     set grepprg=rg\ --vimgrep\ --no-column\ --smart-case
   endif
-  nnoremap <leader>rg :Rg<CR>
+  nnoremap <leader>g :Rg<CR>
 " }}}
 " CoC {{{
 
