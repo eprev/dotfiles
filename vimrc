@@ -345,15 +345,21 @@
   map <leader>e :edit %%
 
 " }}}
+" quickfix {{{
+  nnoremap [q :cp<CR>
+  nnoremap ]q :cn<CR>
+  nnoremap [Q :cr<CR>
+  nnoremap ]Q :cla<CR>
+  nnoremap [o :copen<CR>
+  nnoremap ]o :cclose<CR>
+" }}}
 " Tagbar {{{
-
   " Toggle Tagbar
   nnoremap <F8> :TagbarToggle<CR>
   map <leader>tb :TagbarToggle<cr>
   " Auto focus Tagbar and close
   let g:tagbar_autofocus = 1
   let g:tagbar_autoclose = 1
-
 " }}}
 " ZK {{{
 
