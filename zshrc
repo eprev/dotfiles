@@ -98,7 +98,7 @@ fi
 # fzf {{{
 if command -v rg &> /dev/null; then
   export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-  export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore --glob "!.git/*""
+  export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore --glob '!.git/*'"
 fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
