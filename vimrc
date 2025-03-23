@@ -258,7 +258,7 @@
   nnoremap <leader>z :sh<cr>
 
   " Paste from the system clipboard
-  nnoremap <leader>p "*p
+  " nnoremap <leader>p "*p
 
   " Aligning
   nnoremap <Leader>a= :Tabularize /=<CR>
@@ -382,7 +382,7 @@
   nnoremap <leader>f :Files<CR>
   nnoremap <leader>b :Buffers<CR>
   " nnoremap <leader>g :GFiles<CR>
-  nnoremap <leader>t :Tags<CR>
+  " nnoremap <leader>t :Tags<CR>
   " git grep
   command! -bang -nargs=* Gg call fzf#vim#grep('git grep --line-number -- '.fzf#shellescape(<q-args>), 1, <bang>0)
   nnoremap <leader>G :Gg<CR>
