@@ -245,8 +245,8 @@
   autocmd TabLeave * let g:lasttab = tabpagenr()
 
   " Switch between tabs
-  nnoremap <C-j> :tabp<CR>
-  nnoremap <C-k> :tabn<CR>
+  nnoremap <C-[> :tabp<CR>
+  nnoremap <C-]> :tabn<CR>
 
   " Map <M-h,j,k,l> to resize windows
   nnoremap <silent> ˙ <C-w><
@@ -378,13 +378,20 @@
   " nnoremap <leader>g :GFiles<CR>
   nnoremap <leader>t :Tags<CR>
 
+
+  command! -bang -nargs=* Gg
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+  nnoremap <leader>g :Gg<CR>
+
 " }}}
 " Ripgrep {{{
   if executable('rg')
     command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob '!{.git,node_modules}/*' --color always ".shellescape(<q-args>), 1, <bang>0)
-    set grepprg=rg\ --vimgrep\ --smart-case\ --no-column
+    set grepprg=rg\ --vimgrep\ --no-column
   endif
-  nnoremap <leader>g :Rg<CR>
+  nnoremap <leader>r :Rg<CR>
 " }}}
 " CoC {{{
 
