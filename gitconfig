@@ -37,6 +37,9 @@
     excludesfile = ~/.gitignore
     pager = less -x4 -r
 
+[merge]
+    tool = "vimdiff"
+
 [diff]
     algorithm = patience
     colorMoved=default
