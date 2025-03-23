@@ -119,6 +119,7 @@
 
     open = "!vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only HEAD | tr '\\n' ' ')"
     edit = "!f() { vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only "$1"^.."$1" | tr '\\n' ' '); }; f"
+    conflicts = "!f() { vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only --diff-filter=U | tr '\\n' ' '); }; f"
     age = "!git for-each-ref --sort=committerdate --format='%(refname:short) * %(authorname) * %(committerdate:relative)' refs/remotes/ | column -t -s '*'"
 
 [push]

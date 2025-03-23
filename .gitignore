@@ -1,6 +1,7 @@
 *.o
 *.log
 *.so
+tags
 vim/.netrwhist
 vim/.VimballRecord
 vim/doc/tags
