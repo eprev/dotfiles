@@ -9,6 +9,7 @@ highlight link typescriptClassName Function
 highlight link typescriptGlobal Identifier
 highlight link typescriptIdentifier Identifier
 highlight link typescriptIdentifierName Identifier
+highlight link typescriptDefaultImportName Identifier
 highlight link typescriptFuncType Identifier
 highlight link typescriptTry Keyword
 highlight link typescriptExceptions Keyword
