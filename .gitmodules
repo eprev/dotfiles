@@ -36,7 +36,7 @@
 	url = https://github.com/tmux-plugins/tmux-yank.git
 [submodule "vim/pack/default/start/yats"]
 	path = vim/pack/default/start/yats
-	url = https://github.com/HerringtonDarkholme/yats.vim.git
+	url = https://github.com/eprev/yats.vim.git
 [submodule "vim/pack/default/start/vim-svelte-plugin"]
 	path = vim/pack/default/start/vim-svelte-plugin
 	url = https://github.com/leafOfTree/vim-svelte-plugin
