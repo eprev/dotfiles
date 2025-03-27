@@ -55,3 +55,6 @@
 [submodule "vim/pack/plugins/start/vim-tmux-navigator"]
 	path = vim/pack/plugins/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/pack/default/start/vimux"]
+	path = vim/pack/default/start/vimux
+	url = https://github.com/preservim/vimux.git
