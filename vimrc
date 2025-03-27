@@ -705,6 +705,20 @@ map <leader>mm :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . "> 
   let g:vim_svelte_plugin_use_typescript = 1
 
 " }}}
+" vim-test {{{
+  let test#strategy = "vimux"
+  let g:test#preserve_screen = 0
+
+  " augroup test
+  "   autocmd!
+  "   autocmd BufWrite * if test#exists() |
+  "     \   TestFile |
+  "     \ endif
+  " augroup END
+
+  nnoremap <leader>tn :TestNearest<CR>
+  nnoremap <leader>tf :TestFile<CR>
+" }}}
 " Java {{{
 
 let java_highlight_functions = "style"
