@@ -58,3 +58,6 @@
 [submodule "vim/pack/default/start/vimux"]
 	path = vim/pack/default/start/vimux
 	url = https://github.com/preservim/vimux.git
+[submodule "vim/pack/default/start/vim-test"]
+	path = vim/pack/default/start/vim-test
+	url = https://github.com/vim-test/vim-test.git
