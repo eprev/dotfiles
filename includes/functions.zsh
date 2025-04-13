@@ -1,5 +1,25 @@
 # sh.vim: bash
 
+# kill process
+kp () {
+  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+    kp
+  fi
+}
+
+# kill server
+ks () {
+  local pid=$(lsof -Pwni tcp | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:tcp]'" | awk '{print $2}')
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+    ks
+  fi
+}
+
 relpath () {
   python3 -c "import os.path; print(os.path.relpath('$1','${2:-$PWD}'))"
 }
