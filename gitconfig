@@ -1,0 +1,137 @@
+# vim: ft=dosini
+
+[color]
+    ui = auto
+
+[color "grep"]
+    selected = 8
+    filename = normal
+    linenumber = 8
+    separator = 8
+
+[color "diff"]
+    new=green
+    old=red
+    newMoved=green bold
+    oldMoved=red bold
+    newMoved=green dim
+    oldMoved=red dim
+    newMovedAlternative=green dim
+    oldMovedAlternative=red dim
+
+[color "grep"]
+    selected=248
+    filename=72
+    separator=237
+    linenumber=237
+    match=208
+
+[user]
+    name = Anton Eprev
+    email = eprev@me.com
+
+[include]
+    path = ~/.gitconfig_local
+
+[core]
+    excludesfile = ~/.gitignore
+    pager = less -x4 -r
+
+[merge]
+    tool = "vimdiff"
+
+[mergetool]
+    keepBackup = false
+
+[diff]
+    algorithm = patience
+    colorMoved=default
+
+[apply]
+    whitespace = nowarn
+
+[alias]
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+
+    ### Explore your history, the commits and the code
+
+    # List commits in short form, with colors and branch/tag annotations
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+    # List commits showing changed files is invoked with git ll and looks like this:
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    # Graph
+    lg = log --graph --pretty="format:%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+
+    me = log --author=eprev
+
+    ### Log commands to inspect (recent) history
+
+    # Show a diff last commit:
+    dlc = diff --cached HEAD^
+
+    ### Finding files and content inside files (grep)
+
+    # Find a file path in codebase:
+    ff = "!git ls-files | grep -i"
+
+    # Search/grep your entire codebase for a string:
+    grep = grep -Ii
+
+    gre = grep -Ii --line-number --heading --break
+    gra = "!git gre"
+
+    ### Going meta: List all your Aliases (la)
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    ### Tag aliases
+
+    # Show the last tag:
+    lt = describe --tags --abbrev=0
+
+    ### Basic Shortcuts
+
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ai = add --interactive
+    ci = commit
+    cma = commit -a -m
+    ca = commit --amend
+    co = checkout
+    cof= "!git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
+    br = for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+    diff = diff --word-diff
+    dc = diff --cached
+    mt = mergetool
+
+    ### Stash operations
+
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+
+    ### File level ignoring
+
+    assume   = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    ### Snapshots
+
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+    ### Miscellaneous
+
+    open = "!vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only HEAD | tr '\\n' ' ')"
+    edit = "!f() { vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only "$1"^.."$1" | tr '\\n' ' '); }; f"
+    conflicts = "!f() { vim -c \"cd $GIT_PREFIX\" -p $(git diff --name-only --diff-filter=U | tr '\\n' ' '); }; f"
+    age = "!git for-each-ref --sort=committerdate --format='%(refname:short) * %(authorname) * %(committerdate:relative)' refs/remotes/ | column -t -s '*'"
+
+[push]
+	default = simple
+  autoSetupRemote = true
+
+[url "git@gitlab.booking.com:"]
+	insteadOf = https://gitlab.booking.com/

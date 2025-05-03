@@ -1,0 +1,14 @@
+*.o
+*.log
+*.so
+tags
+vim/.netrwhist
+vim/.VimballRecord
+vim/doc/tags
+vim/doc/tags-ja
+vim/yankring_history_v2.txt
+vim/ftdetect/tmpl.vim
+vim/plugin/booking.vim
+vim/syntax/tmpl.vim
+vim/view
+vim/sessions

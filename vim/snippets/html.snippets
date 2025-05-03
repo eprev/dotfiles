@@ -1,0 +1,66 @@
+# Generic Doctype
+snippet doctype
+	<!DOCTYPE html>
+snippet html
+	<html>
+		${1}
+	</html>
+snippet body
+	<body>
+		${1}
+	</body>
+snippet head
+	<head>
+		<meta charset=utf-8">
+		<title>${1}</title>
+		${2}
+	</head>
+snippet title
+	<title>${1}</title>${2}
+snippet script
+	<script>
+		${1}
+	</script>${2}
+snippet scr iptsrc
+	<script src="${1}" async></script>${2}
+snippet style
+	<style>
+		${2}
+	</style>${3}
+snippet div
+	<div>
+		${1}
+	</div>
+snippet fieldset
+	<fieldset>
+		<legend>${1:name}</legend>
+		${2}
+	</fieldset>
+snippet form
+	<form action="${1}" method="${2:get}">
+		${3}
+	</form>
+snippet h1
+	<h1>${1}</h1>
+snippet input
+	<input type="${1:text/submit/hidden/button/email}" name="${2}" value="${3}">${4}
+snippet label
+	<label for="${2:$1}">${1:name}</label><input type="${3:text/submit/hidden/button/email}" name="${4:$2}" value="${5}" id="${6:$2}">${7}
+snippet link
+	<link rel="${1:stylesheet}" href="${2}">${4}
+snippet meta
+	<meta name="${1:name}" content="${2:content}">${3}
+snippet opt
+	<option value="${1:option}">${2:$1}</option>${3}
+snippet optt
+	<option>${1:option}</option>${2}
+snippet select
+	<select name="${1:some_name}">
+		<option value="${2:option}">${3:$2}</option>
+	</select>${5}
+snippet table
+	<table>
+		${1}
+	</table>${4}
+snippet textarea
+	<textarea name="${1:Name}">${2}</textarea>${3}

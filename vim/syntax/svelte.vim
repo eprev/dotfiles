@@ -1,0 +1,5 @@
+highlight link svelteKey Identifier
+highlight link svelteBlockStart Identifier
+highlight link svelteAtTags Identifier
+highlight link javascriptSvelteScript Identifier
+highlight link htmlSvelteTemplate Normal

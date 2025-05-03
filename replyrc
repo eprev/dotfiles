@@ -1,0 +1,22 @@
+script_line1 = use strict
+script_line2 = use warnings
+script_line3 = use 5.018002
+
+[Interrupt]
+[FancyPrompt]
+[DataDumper]
+[Colors]
+[Editor]
+[ReadLine]
+[Hints]
+[Packages]
+[LexicalPersistence]
+[ResultCache]
+[Autocomplete::Packages]
+[Autocomplete::Lexicals]
+[Autocomplete::Functions]
+[Autocomplete::Globals]
+[Autocomplete::Methods]
+[Autocomplete::Commands]
+[AutoRefresh]
+track_require = 1

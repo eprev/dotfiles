@@ -1,0 +1,34 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
+    "javascript",
+    "typescriptreact",
+    "javascriptreact",
+    "json",
+    "css",
+    "python",
+    "markdown"
+  ],
+  "eslint.filetypes": [
+    "typescript",
+    "javascript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "coc.preferences.colorSupport": false,
+  "yank.highlight.enable": false,
+  "list.insertMappings": {
+    "§": "do:exit"
+  },
+  "languageserver": {
+    "zk": {
+      "command": "zk",
+      "args": ["lsp"],
+      "trace.server": "messages",
+      "filetypes": ["markdown"]
+    }
+  },
+  "snippets.ultisnips.pythonPrompt": false,
+  "svelte.enable-ts-plugin": false,
+  "python.formatting.autopep8Path": "/Users/eprev/Library/Python/3.11/bin/autopep8"
+}

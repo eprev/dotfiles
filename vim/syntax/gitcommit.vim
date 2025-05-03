@@ -1,0 +1,4 @@
+highlight link gitcommitSummary Normal
+highlight link gitcommitSelectedType Normal
+highlight link gitcommitHeader Normal
+highlight link gitcommitSelectedFile String

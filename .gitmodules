@@ -1,0 +1,63 @@
+[submodule "vim/pack/default/start/coc"]
+	path = vim/pack/default/start/coc
+	url = https://github.com/neoclide/coc.nvim.git
+[submodule "fzf"]
+	path = fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "vim/pack/default/start/fzf"]
+	path = vim/pack/default/start/fzf
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/pack/default/start/tagbar"]
+	path = vim/pack/default/start/tagbar
+	url = https://github.com/preservim/tagbar.git
+[submodule "vim/pack/default/start/tabular"]
+	path = vim/pack/default/opt/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "vim/pack/default/start/tcomment"]
+	path = vim/pack/default/start/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "vim/pack/default/start/vim-gitgutter"]
+	path = vim/pack/default/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/pack/default/start/editorconfig"]
+	path = vim/pack/default/start/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "tmux/plugins/copycat"]
+	path = tmux/plugins/copycat
+	url = https://github.com/tmux-plugins/tmux-copycat.git
+[submodule "tmux/plugins/open"]
+	path = tmux/plugins/open
+	url = https://github.com/tmux-plugins/tmux-open.git
+[submodule "tmux/plugins/ressurect"]
+	path = tmux/plugins/resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect.git
+[submodule "tmux/plugins/yank"]
+	path = tmux/plugins/yank
+	url = https://github.com/tmux-plugins/tmux-yank.git
+[submodule "vim/pack/default/start/yats"]
+	path = vim/pack/default/start/yats
+	url = https://github.com/eprev/yats.vim.git
+[submodule "vim/pack/default/start/vim-svelte-plugin"]
+	path = vim/pack/default/start/vim-svelte-plugin
+	url = https://github.com/leafOfTree/vim-svelte-plugin
+[submodule "vim/pack/default/start/context"]
+	path = vim/pack/default/start/context
+	url = https://github.com/wellle/context.vim
+[submodule "vim/pack/vim-javascript/start/vim-javascript"]
+	path = vim/pack/default/start/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/pack/default/start/vim-easymotion"]
+	path = vim/pack/default/start/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "zsh/zsh-autosuggestions"]
+	path = zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "vim/pack/plugins/start/vim-tmux-navigator"]
+	path = vim/pack/plugins/start/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/pack/default/start/vimux"]
+	path = vim/pack/default/start/vimux
+	url = https://github.com/preservim/vimux.git
+[submodule "vim/pack/default/start/vim-test"]
+	path = vim/pack/default/start/vim-test
+	url = https://github.com/vim-test/vim-test.git
