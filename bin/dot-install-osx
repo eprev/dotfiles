@@ -60,3 +60,5 @@ pnpm -g install typescript
 
 # lets encrypt
 brew install certbot
+
+brew install hashicorp/tap/vault
