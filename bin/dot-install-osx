@@ -11,8 +11,10 @@ fi
 
 # node & pnpm
 if ! command -v node &> /dev/null; then
-  curl -fsSL https://get.pnpm.io/install.sh | sh -
-  pnpm env use --global lts
+  brew install node
+  brew install pnpm
+  # curl -fsSL https://get.pnpm.io/install.sh | sh -
+  # pnpm env use --global lts
 fi
 
 # Ask for the administrator password upfront.
